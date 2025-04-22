@@ -8,7 +8,7 @@ public class PoolManager
 
     public void Init()
     {
-
+        SetPrefab("Prefabs/Rock");
 
         pools = new List<GameObject>[prefabs.Count]; //리스트의 길이는 등록한 프리펩과 1:1
         for (int index = 0; index < pools.Length; index++)

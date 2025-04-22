@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager
@@ -16,18 +17,23 @@ public class PlayerManager
         _critRate = 50f;
 
         _maxCritDamage = 50f;
-        _maxAttackPower = 100f;
+        _maxAttackPower = 10f;
         _maxAttackSpeed = 0.78f;
         _maxStaminaPoint = 100f;
         _maxWillPoint = 100f;
     }
 
-    /// <summary>
-    /// 대상에게 데미지를 주는 메소드
-    /// </summary>
-    /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public List<float> GetPlayerStatus()
     {
+        List<float> playerStatus = new List<float>();
 
+        playerStatus.Add(_critRate);
+        playerStatus.Add(_maxCritDamage);
+        playerStatus.Add(_maxAttackPower);
+        playerStatus.Add(_maxAttackSpeed);
+        playerStatus.Add(_maxStaminaPoint);
+        playerStatus.Add(_maxWillPoint);
+
+        return playerStatus;
     }
 }

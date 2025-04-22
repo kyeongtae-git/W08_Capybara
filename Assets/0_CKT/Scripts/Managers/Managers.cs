@@ -14,11 +14,20 @@ public class Managers : MonoBehaviour
     public static PoolManager PoolManager => _poolManager;
     static PoolManager _poolManager = new PoolManager();
 
+    public static UIManager UIManager => _uiManager;
+    static UIManager _uiManager = new UIManager();
+
     public static SoundManager SoundManager => _soundManager;
     static SoundManager _soundManager = new SoundManager();
 
     public static PlayerManager PlayerManager => _playerManager;
     static PlayerManager _playerManager = new PlayerManager();
+
+    public static RockManager RockManager => _rockManager;
+    static RockManager _rockManager = new RockManager();
+
+    public static EventManager EventManager => _eventManager;
+    static EventManager _eventManager = new EventManager();
 
     private void Awake()
     {
@@ -31,13 +40,13 @@ public class Managers : MonoBehaviour
         {
             Destroy(this);
         }
-    }
 
-    private void Start()
-    {
         GameManager.Init();
         PoolManager.Init();
+        UIManager.Init();
         SoundManager.Init();
         PlayerManager.Init();
+        RockManager.Init();
+        EventManager.Init();
     }
 }
