@@ -5,6 +5,9 @@ public class Managers : MonoBehaviour
     public static Managers Instance => _instance;
     static Managers _instance;
 
+    public static Utils Utils => _utils;
+    static Utils _utils = new Utils();
+
     public static GameManager GameManager => _gameManager;
     static GameManager _gameManager = new GameManager();
 
@@ -13,6 +16,9 @@ public class Managers : MonoBehaviour
 
     public static SoundManager SoundManager => _soundManager;
     static SoundManager _soundManager = new SoundManager();
+
+    public static PlayerManager PlayerManager => _playerManager;
+    static PlayerManager _playerManager = new PlayerManager();
 
     private void Awake()
     {
@@ -32,5 +38,6 @@ public class Managers : MonoBehaviour
         GameManager.Init();
         PoolManager.Init();
         SoundManager.Init();
+        PlayerManager.Init();
     }
 }
