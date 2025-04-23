@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Button_SelectSkill : MonoBehaviour
 {
-    [SerializeField] int _skillID;
+    int _skillID;
     Button _selectSkillButton;
 
     void Start()
