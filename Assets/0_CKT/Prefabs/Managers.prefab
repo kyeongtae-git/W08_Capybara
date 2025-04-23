@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7209403386084964117}
   - component: {fileID: 7849658198940424186}
+  - component: {fileID: 6516535666794094674}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -44,3 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046d728a4f1e32743961111a140c213d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6516535666794094674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335339560073730205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ed6e163380b4d46b3fadcd80184c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockHealthData: {fileID: 0}

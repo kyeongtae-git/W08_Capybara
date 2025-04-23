@@ -4,7 +4,7 @@ using UnityEngine;
 public class RockHealthDataLoader : MonoBehaviour
 {
     private TextAsset csvFile;
-    public RockHealthData rockHealthData;
+    private RockHealthData rockHealthData;
     public static RockHealthDataLoader _instance { get; private set; }
 
     public List<StageHP> LoadList()
@@ -45,9 +45,11 @@ public class RockHealthDataLoader : MonoBehaviour
         rockHealthData = Resources.Load<RockHealthData>("KMJ/RockHealthDataTable");
 
         //csvFile로 데이터 초기화하기
-        rockHealthData.MakeDictionary(LoadList());
+        rockHealthData.MakeDictionary(LoadList());            
+    }
 
-        Debug.Log(rockHealthData.GetHP(40));
-            
+    public float LoadHealthData(int stageNum)
+    {
+        return rockHealthData.GetHP(stageNum);
     }
 }
