@@ -8,7 +8,7 @@ public class Text_Stage : MonoBehaviour
     void Start()
     {
         _stageTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateStageEvent += UpdateStage;
+        Managers.UIManager.OnUpdateStageUIEvent += UpdateStage;
     }
 
     void UpdateStage(int index)

@@ -9,7 +9,7 @@ public class Image_Stamina : MonoBehaviour
     void Start()
     {
         _staminaImage = GetComponent<Image>();
-        Managers.UIManager.OnUpdateUIEvent += UpdateImage;
+        Managers.UIManager.OnUpdateStatusUIEvent += UpdateImage;
     }
 
     void UpdateImage(List<float> list)

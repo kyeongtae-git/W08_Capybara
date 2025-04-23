@@ -17,7 +17,7 @@ public class GameManager
 
     public void LateInit()
     {
-        Managers.UIManager.OnUpdateStageEvent?.Invoke(_stage);
+        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
     }
 
     public void GameOver()
@@ -36,7 +36,7 @@ public class GameManager
         Managers.SkillManager.MaxBuff();
 
         _stage++;
-        Managers.UIManager.OnUpdateStageEvent?.Invoke(_stage);
+        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
         Debug.Log($"{_stage} 스테이지로 이동");
 
         //이벤트 발생했을 때
