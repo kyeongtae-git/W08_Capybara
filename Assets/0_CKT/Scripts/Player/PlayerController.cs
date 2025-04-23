@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         _coAttack = null;
         _coStartBuff = null;
-        _decreaseWill = 10f * Time.deltaTime;
+        _decreaseWill = -1f * Time.deltaTime;
     }
 
     void Update()
@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
 
             //의지 감소
             Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _decreaseWill);
+            if (Managers.PlayerManager.CurStatusList[(int)StatusType.Will] <= 0)
+            {
+                Managers.GameManager.GameOver();
+            }
         }
         else
         {

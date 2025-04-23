@@ -52,7 +52,8 @@ public class PlayerManager
 
     void UpdateUI_Status()
     {
-        float percent = _curStatusList[4] / _maxStatusList[4];
+        float percent = _curStatusList[(int)StatusType.Will] / _maxStatusList[(int)StatusType.Will];
         Managers.UIManager.OnImage_WillUpdateImageEvent?.Invoke(percent);
+        //Debug.Log($"{_curStatusList[(int)StatusType.Will]} / {_maxStatusList[(int)StatusType.Will]}");
     }
 }

@@ -15,6 +15,12 @@ public class GameManager
         _stage = 1;
     }
 
+    public void GameOver()
+    {
+        _curGameState = GameState.Idle;
+        Debug.Log("ÀÇÁö°¡ ¹Ù´Ú³µ½À´Ï´Ù.");
+    }
+
     public void GoNextStage()
     {
         _curGameState = GameState.Idle;

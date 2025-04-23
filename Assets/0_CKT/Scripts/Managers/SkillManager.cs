@@ -114,7 +114,7 @@ public class SkillManager
                 Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, 10f);
             }
             if (_skillOverlapList[(int)SkillType.Hit_Stamina] > 0)
-                Debug.Log($"적중 시 효과 : 의지 획복 +{_skillOverlapList[(int)SkillType.Hit_Stamina]}");
+                Debug.Log($"적중 시 효과 : 스태미나 획복 +{_skillOverlapList[(int)SkillType.Hit_Stamina]}");
         }
     }
 
