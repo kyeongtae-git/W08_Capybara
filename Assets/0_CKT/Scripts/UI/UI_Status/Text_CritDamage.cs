@@ -9,7 +9,7 @@ public class Text_CritDamage : MonoBehaviour
     void Start()
     {
         _critDamageTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
     }
 
     void UpdateUI(List<float> list)

@@ -9,8 +9,10 @@ public class UIManager
     public Action<bool> OnUI_SkillSelectionCanvasEnableEvent;
     public Action OnButton_SelectSkillSetEvent;
 
-    public Action<List<float>> OnUpdateUIEvent;
-    public Action<int> OnUpdateStageEvent;
+    public Action<List<float>> OnUpdateStatusUIEvent;
+    public Action<int> OnUpdateStageUIEvent;
+
+    public Action<float> OnUpdateRockHealthUIEvent;
 
     public void Init()
     {

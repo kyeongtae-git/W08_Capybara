@@ -36,6 +36,9 @@ public class RockController : MonoBehaviour
         _curHealth = Mathf.Clamp(_curHealth, 0, _maxHealth);
         Debug.Log($"Rock 데미지 받음 : {damage}, 현재 체력 : {_curHealth}");
 
+        float healthPercent = _curHealth / _maxHealth;
+        Managers.UIManager.OnUpdateRockHealthUIEvent?.Invoke(healthPercent);
+
         //사망 확인
         if (_curHealth <= 0)
         {

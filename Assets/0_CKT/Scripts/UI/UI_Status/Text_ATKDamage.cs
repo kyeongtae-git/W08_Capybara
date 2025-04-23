@@ -9,7 +9,7 @@ public class Text_ATKDamage : MonoBehaviour
     void Start()
     {
         _atkDamageTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
     }
 
     void UpdateUI(List<float> list)

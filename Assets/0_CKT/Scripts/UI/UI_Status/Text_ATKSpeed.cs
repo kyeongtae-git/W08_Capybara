@@ -9,7 +9,7 @@ public class Text_ATKSpeed : MonoBehaviour
     void Start()
     {
         _atkSpeedTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
     }
 
     void UpdateUI(List<float> list)

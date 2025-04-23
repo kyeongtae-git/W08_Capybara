@@ -58,6 +58,6 @@ public class PlayerManager
         uiList[(int)StatusType.Will] = _curStatusList[(int)StatusType.Will] / _maxStatusList[(int)StatusType.Will];
         uiList[(int)StatusType.Stamina] = _curStatusList[(int)StatusType.Stamina] / _maxStatusList[(int)StatusType.Stamina];
 
-        Managers.UIManager.OnUpdateUIEvent?.Invoke(uiList);
+        Managers.UIManager.OnUpdateStatusUIEvent?.Invoke(uiList);
     }
 }

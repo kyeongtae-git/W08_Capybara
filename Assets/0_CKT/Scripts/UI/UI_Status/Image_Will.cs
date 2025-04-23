@@ -9,7 +9,7 @@ public class Image_Will : MonoBehaviour
     void Start()
     {
         _willImage = GetComponent<Image>();
-        Managers.UIManager.OnUpdateUIEvent += UpdateImage;
+        Managers.UIManager.OnUpdateStatusUIEvent += UpdateImage;
     }
 
     void UpdateImage(List<float> list)
