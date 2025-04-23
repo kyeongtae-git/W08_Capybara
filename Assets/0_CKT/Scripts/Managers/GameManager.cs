@@ -1,12 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager
 {
     public GameState CurGameState => _curGameState;
     GameState _curGameState;
 
+    int _maxStage = 54;
+
+    public int Stage => _stage;
     int _stage;
+
     int _eventCount = 3;
 
     public void Init()
@@ -23,32 +28,33 @@ public class GameManager
     public void GameOver()
     {
         _curGameState = GameState.Idle;
-        Debug.Log("ÀÇÁö°¡ ¹Ù´Ú³µ½À´Ï´Ù.");
+        Debug.Log("ì˜ì§€ê°€ ë°”ë‹¥ë‚¬ìŠµë‹ˆë‹¤.");
+        SceneManager.LoadScene("GameOver");
     }
 
     public void GoNextStage()
     {
         _curGameState = GameState.Idle;
 
-        //½ºÅÈ ±âº» »óÅÂ·Î ÃÊ±âÈ­
+        //ìŠ¤íƒ¯ ê¸°ë³¸ ìƒíƒœë¡œ ì´ˆê¸°í™”
         Managers.PlayerManager.Init();
-        //¿µ±¸ ½ºÅ³ È¿°ú ´Ù½Ã Àû¿ë
+        //ì˜êµ¬ ìŠ¤í‚¬ íš¨ê³¼ ë‹¤ì‹œ ì ìš©
         Managers.SkillManager.MaxBuff();
 
         _stage++;
         Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
-        Debug.Log($"{_stage} ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+        Debug.Log($"{_stage} ìŠ¤í…Œì´ì§€ë¡œ ì´ë™");
 
-        //ÀÌº¥Æ® ¹ß»ıÇßÀ» ¶§
+        //ì´ë²¤íŠ¸ ë°œìƒí–ˆì„ ë•Œ
         if ((_stage % _eventCount) == 0)
         {
-            //ÀÌº¥Æ® ¹ß»ı UI È°¼ºÈ­ (½ºÅ³ ¼±ÅÃÀº ÀÌº¥Æ® ¹ß»ıÀÇ ¼±ÅÃ ¹öÆ°¿¡¼­ È£Ãâ)
+            //ì´ë²¤íŠ¸ ë°œìƒ UI í™œì„±í™” (ìŠ¤í‚¬ ì„ íƒì€ ì´ë²¤íŠ¸ ë°œìƒì˜ ì„ íƒ ë²„íŠ¼ì—ì„œ í˜¸ì¶œ)
             Managers.UIManager.OnUI_EventCanvasEnableEvent?.Invoke(true);
         }
-        //ÀÌº¥Æ® ¹ß»ı ¾È ÇßÀ» ¶§
+        //ì´ë²¤íŠ¸ ë°œìƒ ì•ˆ í–ˆì„ ë•Œ
         else
         {
-            //½ºÅ³ ¼±ÅÃ UI È°¼ºÈ­
+            //ìŠ¤í‚¬ ì„ íƒ UI í™œì„±í™”
             Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true);
             Managers.UIManager.OnButton_SelectSkillSetEvent?.Invoke();
         }
@@ -56,34 +62,39 @@ public class GameManager
 
     public IEnumerator StartStage()
     {
-        //½ºÅÈ ±âº» »óÅÂ·Î ÃÊ±âÈ­
+        //ìŠ¤íƒ¯ ê¸°ë³¸ ìƒíƒœë¡œ ì´ˆê¸°í™”
         Managers.PlayerManager.Init();
-        //¿µ±¸ ½ºÅ³ È¿°ú ´Ù½Ã Àû¿ë
+        //ì˜êµ¬ ìŠ¤í‚¬ íš¨ê³¼ ë‹¤ì‹œ ì ìš©
         Managers.SkillManager.MaxBuff();
 
-        // nÃÊ µ¿¾È ÈëÆÄ´Â ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+        // nì´ˆ ë™ì•ˆ í™íŒŒëŠ” ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
 
 
-        // Àû´çÇÑ °Å¸®¿¡ µ¹ »ı¼º
+        // ì ë‹¹í•œ ê±°ë¦¬ì— ëŒ ìƒì„±
+        //55ìŠ¤í…Œì´ì§€ë¼ë©´ ì—ë©”ë„ë“œ ë°”ìœ„ ìƒì„±í•˜ê¸°
         Managers.RockManager.Init();
         Vector3 spawnPoint = Managers.RockManager.SpawnPoint;
-        Managers.PoolManager.GetPrefabID(0, null, spawnPoint);
+        int index = (_stage > _maxStage) ? 1 : 0;
+        Managers.PoolManager.GetPrefabID(index, null, spawnPoint);
 
-        // µŞ ¹è°æ ÀÌµ¿
+        // ë’· ë°°ê²½ ì´ë™
 
 
-        // nÃÊ ÈÄ¿¡ µ¹ ¾Õ¿¡ ÇÃ·¹ÀÌ¾î µµÂø
+        // nì´ˆ í›„ì— ëŒ ì•ì— í”Œë ˆì´ì–´ ë„ì°©
         float moveTime = Managers.RockManager.MoveTime;
         yield return new WaitForSeconds(moveTime);
 
-        // GameState.Fight·Î º¯°æ
-        _curGameState = GameState.Fight;
-        Debug.Log($"°ÔÀÓ »óÅÂ º¯°æµÊ : {_curGameState}");
-    }
-
-    public void ChangeGameState(GameState newGameState)
-    {
-        _curGameState = newGameState;
-        Debug.Log($"°ÔÀÓ »óÅÂ º¯°æµÊ : {_curGameState}");
+        // GameState.Fightë¡œ ë³€ê²½
+        //55ìŠ¤í…Œì´ì§€ë¼ë©´ LoadSceneìœ¼ë¡œ ìŠ¹ë¦¬ì”¬ ë¶ˆëŸ¬ì˜¤ê¸°
+        if (_stage > _maxStage)
+        {
+            //TODO : íƒ€ì´í‹€ ì”¬ ì´ë¦„ ë„£ê¸°
+            SceneManager.LoadScene("GameClear");
+        }
+        else
+        {
+            _curGameState = GameState.Fight;
+            Debug.Log($"ê²Œì„ ìƒíƒœ ë³€ê²½ë¨ : {_curGameState}");
+        }
     }
 }
