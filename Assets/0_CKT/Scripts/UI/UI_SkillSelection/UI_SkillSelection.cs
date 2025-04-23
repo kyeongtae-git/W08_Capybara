@@ -8,6 +8,8 @@ public class UI_SkillSelection : MonoBehaviour
     {
         _canvas = GetComponent<Canvas>();
         Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent += OnCanvasEnable;
+
+        OnCanvasEnable(true);
     }
 
     void OnCanvasEnable(bool boolean)

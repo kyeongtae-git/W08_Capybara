@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerManager
@@ -9,7 +10,14 @@ public class PlayerManager
     List<float> _maxStatusList = new List<float>();
 
     public List<float> CurStatusList => _curStatusList;
+
     List<float> _curStatusList = new List<float>();
+
+    public float UseWill => _useWill;
+    float _useWill = 5f;
+
+    public float UseStamina => _useStamina;
+    float _useStamina = 10f;
 
     public void Init()
     {
@@ -31,29 +39,25 @@ public class PlayerManager
         _maxStatusList[index] *= buff;
         _curStatusList[index] = _maxStatusList[index];
         Debug.Log($"{(StatusType)index} 영구 증가 적용");
-
-        UpdateUI_Status();
     }
 
     public void UpdateCurStatus(int index, float buff)
     {
         _curStatusList[index] *= buff;
-
-        UpdateUI_Status();
     }
 
     public void ChangeStatus(int index, float change)
     {
         _curStatusList[index] += change;
         _curStatusList[index] = Mathf.Clamp(_curStatusList[index], 0, _maxStatusList[index]);
-
-        UpdateUI_Status();
     }
 
-    void UpdateUI_Status()
+    public void UpdateUI_Status()
     {
-        float percent = _curStatusList[(int)StatusType.Will] / _maxStatusList[(int)StatusType.Will];
-        Managers.UIManager.OnImage_WillUpdateImageEvent?.Invoke(percent);
-        //Debug.Log($"{_curStatusList[(int)StatusType.Will]} / {_maxStatusList[(int)StatusType.Will]}");
+        List<float> uiList = _curStatusList.ToList();
+        uiList[(int)StatusType.Will] = _curStatusList[(int)StatusType.Will] / _maxStatusList[(int)StatusType.Will];
+        uiList[(int)StatusType.Stamina] = _curStatusList[(int)StatusType.Stamina] / _maxStatusList[(int)StatusType.Stamina];
+
+        Managers.UIManager.OnUpdateStatusUIEvent?.Invoke(uiList);
     }
 }
