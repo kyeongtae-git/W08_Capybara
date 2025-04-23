@@ -18,6 +18,7 @@ public class GameManager
     public void GoNextStage()
     {
         _curGameState = GameState.Idle;
+
         _stage++;
         Debug.Log($"{_stage} 스테이지로 이동");
 
@@ -32,11 +33,17 @@ public class GameManager
         {
             //스킬 선택 UI 활성화
             Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true);
+            Managers.UIManager.OnButton_SelectSkillSetEvent?.Invoke();
         }
     }
 
     public IEnumerator StartStage()
     {
+        //스탯 기본 상태로 초기화
+        Managers.PlayerManager.Init();
+        //영구 스킬 효과 다시 적용
+        Managers.SkillManager.MaxBuff();
+
         // n초 동안 흙파는 애니메이션 재생
 
 
