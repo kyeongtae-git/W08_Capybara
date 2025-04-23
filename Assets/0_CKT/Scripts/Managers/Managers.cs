@@ -29,6 +29,9 @@ public class Managers : MonoBehaviour
     public static EventManager EventManager => _eventManager;
     static EventManager _eventManager = new EventManager();
 
+    public static SkillManager SkillManager => _skillManager;
+    static SkillManager _skillManager = new SkillManager();
+
     private void Awake()
     {
         if (_instance == null)
@@ -48,5 +51,6 @@ public class Managers : MonoBehaviour
         PlayerManager.Init();
         RockManager.Init();
         EventManager.Init();
+        SkillManager.Init();
     }
 }
