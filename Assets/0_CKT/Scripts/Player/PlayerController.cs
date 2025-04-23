@@ -1,21 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //0 치명타 확률
-    //1 치명타 피해
-    //2 공격력
-    //3 공격 속도
-    //4 의지 수치
-    //5 스태미나 수치
-    List<float> _playerStatus = new List<float>();
+    ParticleSystem _particle;
 
     Coroutine _coAttack;
     Coroutine _coStartBuff;
-
-    float _decreaseWill;
 
     void Start()
     {
@@ -24,21 +17,24 @@ public class PlayerController : MonoBehaviour
 
     void Init()
     {
+        _particle = GetComponentInChildren<ParticleSystem>();
+
         _coAttack = null;
         _coStartBuff = null;
-        _decreaseWill = -1f * Time.deltaTime;
     }
 
     void Update()
     {
         if (Managers.GameManager.CurGameState == GameState.Fight)
         {
+            List<float> playerStatusList = Managers.PlayerManager.CurStatusList.ToList();
+            float useStamina = Managers.PlayerManager.UseStamina;
             _coStartBuff = _coStartBuff ?? StartCoroutine(Managers.SkillManager.CoStartBuff());
-
-            _coAttack = _coAttack ?? StartCoroutine(TakeDamage());
+            _coAttack = _coAttack ?? StartCoroutine(TakeDamage(playerStatusList, useStamina));
 
             //의지 감소
-            Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _decreaseWill);
+            float useWill = Managers.PlayerManager.UseWill;
+            Managers.PlayerManager.ChangeStatus((int)StatusType.Will, -useWill * Time.deltaTime);
             if (Managers.PlayerManager.CurStatusList[(int)StatusType.Will] <= 0)
             {
                 Managers.GameManager.GameOver();
@@ -46,31 +42,41 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _coStartBuff = null;
-
             if (_coAttack != null)
             {
                 StopCoroutine(_coAttack);
-                _coAttack = null;
+                
             }
+            _coStartBuff = null;
+            _coAttack = null;
         }
     }
 
-    IEnumerator TakeDamage()
+    IEnumerator TakeDamage(List<float> playerStatus, float useStamina)
     {
-        _playerStatus = Managers.PlayerManager.CurStatusList;
-
         //TODO : 공격 애니메이션 재생
 
-        float attackTime = 1 / _playerStatus[(int)StatusType.ATKSpeed];
+        float attackTime = 1 / playerStatus[(int)StatusType.ATKSpeed];
         yield return new WaitForSeconds(attackTime);
 
-        float attackDamage = _playerStatus[(int)StatusType.ATKDamage];
-        if (Managers.Utils.RandomSuccess(_playerStatus[(int)StatusType.CritRate] * 0.01f))
+        float attackDamage = playerStatus[(int)StatusType.ATKDamage];
+        if (Managers.Utils.RandomSuccess(playerStatus[(int)StatusType.CritRate] * 0.01f))
         {
-            attackDamage *= (1 + (_playerStatus[(int)StatusType.CritDamage] * 0.01f));
+            attackDamage *= (1 + (playerStatus[(int)StatusType.CritDamage] * 0.01f));
         }
+
+        if (playerStatus[(int)StatusType.Stamina] <= 0)
+        {
+            attackDamage *= 0.5f;
+        }
+
+        //이펙트 재생
+        _particle.Play();
+        //스태미나 소모
+        Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, -useStamina);
+        //데미지 주기
         Managers.RockManager.OnGetDamageEvent?.Invoke(attackDamage);
+        //적중 시 효과
         Managers.SkillManager.HitBuff();
 
         _coAttack = null;

@@ -34,7 +34,6 @@ public class RockController : MonoBehaviour
         //체력 감소
         _curHealth -= damage;
         _curHealth = Mathf.Clamp(_curHealth, 0, _maxHealth);
-
         Debug.Log($"Rock 데미지 받음 : {damage}, 현재 체력 : {_curHealth}");
 
         //사망 확인

@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Image_Will : MonoBehaviour
+public class Image_Stamina : MonoBehaviour
 {
-    Image _willImage;
+    Image _staminaImage;
 
     void Start()
     {
-        _willImage = GetComponent<Image>();
+        _staminaImage = GetComponent<Image>();
         Managers.UIManager.OnUpdateUIEvent += UpdateImage;
     }
 
     void UpdateImage(List<float> list)
     {
-        _willImage.fillAmount = list[(int)StatusType.Will];
+        _staminaImage.fillAmount = list[(int)StatusType.Stamina];
     }
 }
