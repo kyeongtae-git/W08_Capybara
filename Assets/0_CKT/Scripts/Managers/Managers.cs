@@ -53,4 +53,10 @@ public class Managers : MonoBehaviour
         EventManager.Init();
         SkillManager.Init();
     }
+
+    private void Start()
+    {
+        PlayerManager.UpdateUI_Status();
+        GameManager.LateInit();
+    }
 }
