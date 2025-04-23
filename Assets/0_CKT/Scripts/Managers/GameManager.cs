@@ -15,6 +15,11 @@ public class GameManager
         _stage = 1;
     }
 
+    public void LateInit()
+    {
+        Managers.UIManager.OnUpdateStageEvent?.Invoke(_stage);
+    }
+
     public void GameOver()
     {
         _curGameState = GameState.Idle;
@@ -25,7 +30,13 @@ public class GameManager
     {
         _curGameState = GameState.Idle;
 
+        //스탯 기본 상태로 초기화
+        Managers.PlayerManager.Init();
+        //영구 스킬 효과 다시 적용
+        Managers.SkillManager.MaxBuff();
+
         _stage++;
+        Managers.UIManager.OnUpdateStageEvent?.Invoke(_stage);
         Debug.Log($"{_stage} 스테이지로 이동");
 
         //이벤트 발생했을 때
@@ -54,6 +65,7 @@ public class GameManager
 
 
         // 적당한 거리에 돌 생성
+        Managers.RockManager.Init();
         Vector3 spawnPoint = Managers.RockManager.SpawnPoint;
         Managers.PoolManager.GetPrefabID(0, null, spawnPoint);
 
