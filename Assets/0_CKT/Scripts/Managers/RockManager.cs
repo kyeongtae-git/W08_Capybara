@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class RockManager
@@ -22,7 +22,8 @@ public class RockManager
 
     public void Init()
     {
-        _maxHealth = 100f;
+        _maxHealth = RockHealthDataLoader._instance.LoadHealthData(Managers.GameManager.Stage);
+        Debug.Log(_maxHealth);
         _moveSpeed = (_spawnPoint.x - _stopPoint.x) / _moveTime;
     }
 }

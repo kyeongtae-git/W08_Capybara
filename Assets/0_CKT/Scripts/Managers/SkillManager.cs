@@ -1,18 +1,18 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillManager
 {
-    //i¹øÂ° ½ºÅ³ ÁßÃ¸ È½¼ö ¸®½ºÆ®
+    //ië²ˆì§¸ ìŠ¤í‚¬ ì¤‘ì²© íšŸìˆ˜ ë¦¬ìŠ¤íŠ¸
     List<int> _skillOverlapList = new List<int>();
 
     float _holdingTime = 5f;
     float _hitSuccess = 1f;
 
-    float _startMagni = 1.3f;
-    float _hitMagni = 1.2f;
+    float _startMagni = 1.4f;
+    float _hitMagni = 1.04f;
     float _passiveMagni = 1.15f;
     float _recoveryPoint = 1f;
 
@@ -31,56 +31,56 @@ public class SkillManager
     }
 
     /// <summary>
-    /// ÀüÅõ½ÃÀÛ ½Ã ÀÏÁ¤ ½Ã°£ µ¿¾È ¹öÇÁ Àû¿ë
+    /// ì „íˆ¬ì‹œì‘ ì‹œ ì¼ì • ì‹œê°„ ë™ì•ˆ ë²„í”„ ì ìš©
     /// </summary>
     public IEnumerator CoStartBuff()
     {
-        //¹öÇÁ
+        //ë²„í”„
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_CD]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, _startMagni);
         }
         if (_skillOverlapList[(int)SkillType.Start_CD] > 0)
-            Debug.Log($"ÀüÅõ ½ÃÀÛ : Ä¡¸íÅ¸ÇÇÇØ Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Start_CD]}");
+            Debug.Log($"ì „íˆ¬ ì‹œì‘ : ì¹˜ëª…íƒ€í”¼í•´ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Start_CD]}");
 
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AD]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _startMagni);
         }
         if (_skillOverlapList[(int)SkillType.Start_AD] > 0)
-            Debug.Log($"ÀüÅõ ½ÃÀÛ : °ø°İ·Â Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Start_AD]}");
+            Debug.Log($"ì „íˆ¬ ì‹œì‘ : ê³µê²©ë ¥ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Start_AD]}");
 
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AS]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, _startMagni);
         }
         if (_skillOverlapList[(int)SkillType.Start_AS] > 0)
-            Debug.Log($"ÀüÅõ ½ÃÀÛ : °ø°İ¼Óµµ Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Start_AS]}");
+            Debug.Log($"ì „íˆ¬ ì‹œì‘ : ê³µê²©ì†ë„ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Start_AS]}");
 
         Managers.PlayerManager.UpdateUI_Status();
         yield return new WaitForSeconds(_holdingTime);
 
-        //¹öÇÁ ÇØÁ¦
+        //ë²„í”„ í•´ì œ
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_CD]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, (1/ _startMagni));
         }
         if (_skillOverlapList[(int)SkillType.Start_CD] > 0)
-            Debug.Log($"Áö¼Ó ½Ã°£ Á¾·á : Ä¡¸íÅ¸ÇÇÇØ Áõ°¡ ¹öÇÁ ÇØÁ¦ +{_skillOverlapList[(int)SkillType.Start_CD]}");
+            Debug.Log($"ì§€ì† ì‹œê°„ ì¢…ë£Œ : ì¹˜ëª…íƒ€í”¼í•´ ì¦ê°€ ë²„í”„ í•´ì œ +{_skillOverlapList[(int)SkillType.Start_CD]}");
 
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AD]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, (1 / _startMagni));
         }
         if (_skillOverlapList[(int)SkillType.Start_AD] > 0)
-            Debug.Log($"Áö¼Ó ½Ã°£ Á¾·á : °ø°İ·Â Áõ°¡ ¹öÇÁ ÇØÁ¦ +{_skillOverlapList[(int)SkillType.Start_AD]}");
+            Debug.Log($"ì§€ì† ì‹œê°„ ì¢…ë£Œ : ê³µê²©ë ¥ ì¦ê°€ ë²„í”„ í•´ì œ +{_skillOverlapList[(int)SkillType.Start_AD]}");
 
         for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AS]; i++)
         {
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, (1 / _startMagni));
         }
         if (_skillOverlapList[(int)SkillType.Start_AS] > 0)
-            Debug.Log($"Áö¼Ó ½Ã°£ Á¾·á : °ø°İ¼Óµµ Áõ°¡ ¹öÇÁ ÇØÁ¦ +{_skillOverlapList[(int)SkillType.Start_AS]}");
+            Debug.Log($"ì§€ì† ì‹œê°„ ì¢…ë£Œ : ê³µê²©ì†ë„ ì¦ê°€ ë²„í”„ í•´ì œ +{_skillOverlapList[(int)SkillType.Start_AS]}");
 
         Managers.PlayerManager.UpdateUI_Status();
     }
@@ -94,35 +94,44 @@ public class SkillManager
                 Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, _hitMagni);
             }
             if (_skillOverlapList[(int)SkillType.Hit_CD] > 0)
-                Debug.Log($"ÀûÁß ½Ã È¿°ú : Ä¡¸íÅ¸ÇÇÇØ Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Hit_CD]}");
+                Debug.Log($"ì ì¤‘ ì‹œ íš¨ê³¼ : ì¹˜ëª…íƒ€í”¼í•´ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Hit_CD]}");
 
             for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_AD]; i++)
             {
                 Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _hitMagni);
             }
             if (_skillOverlapList[(int)SkillType.Hit_AD] > 0)
-                Debug.Log($"ÀûÁß ½Ã È¿°ú : °ø°İ·Â Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Hit_AD]}");
+                Debug.Log($"ì ì¤‘ ì‹œ íš¨ê³¼ : ê³µê²©ë ¥ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Hit_AD]}");
 
             for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_AS]; i++)
             {
                 Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, _hitMagni);
             }
             if (_skillOverlapList[(int)SkillType.Hit_AS] > 0)
-                Debug.Log($"ÀûÁß ½Ã È¿°ú : °ø°İ¼Óµµ Áõ°¡ ¹öÇÁ Àû¿ë +{_skillOverlapList[(int)SkillType.Hit_AS]}");
-
+                Debug.Log($"ì ì¤‘ ì‹œ íš¨ê³¼ : ê³µê²©ì†ë„ ì¦ê°€ ë²„í”„ ì ìš© +{_skillOverlapList[(int)SkillType.Hit_AS]}");
+            float _willRecoveryPoint = 0;
+            //í•œë²ˆ ë•Œë¦´ë•Œë§ˆë‹¤ ì±„ì›Œì§ˆ ì˜ì§€ íšŒë³µëŸ‰ ê³„ì‚°
+            if(_skillOverlapList[(int)SkillType.Hit_Will]>0)
+            {
+                //ìŠ¤í‚¬ ëª‡ë²ˆ ì°ì—ˆëŠ”ì§€
+                float n = _skillOverlapList[(int)SkillType.Hit_Will];
+                //ì´ˆë‹¹ ê³µê²© íšŸìˆ˜
+                float attackNum = Managers.PlayerManager.CurStatusList[3];
+                _willRecoveryPoint = 4 / (n * attackNum) * (1 - Mathf.Pow((float)Math.E, -0.1f * n) * (1 - Mathf.Pow((float)Math.E, -0.1f * attackNum)));
+            }
             for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_Will]; i++)
             {
-                Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _recoveryPoint);
+                Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _willRecoveryPoint);
             }
             if (_skillOverlapList[(int)SkillType.Hit_Will] > 0)
-                Debug.Log($"ÀûÁß ½Ã È¿°ú : ÀÇÁö È¹º¹ +{_skillOverlapList[(int)SkillType.Hit_Will]}");
+                Debug.Log($"ì ì¤‘ ì‹œ íš¨ê³¼ : ì˜ì§€ íšë³µ +{_skillOverlapList[(int)SkillType.Hit_Will]}");
 
             for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_Stamina]; i++)
             {
                 Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, _recoveryPoint);
             }
             if (_skillOverlapList[(int)SkillType.Hit_Stamina] > 0)
-                Debug.Log($"ÀûÁß ½Ã È¿°ú : ½ºÅÂ¹Ì³ª È¹º¹ +{_skillOverlapList[(int)SkillType.Hit_Stamina]}");
+                Debug.Log($"ì ì¤‘ ì‹œ íš¨ê³¼ : ìŠ¤íƒœë¯¸ë‚˜ íšë³µ +{_skillOverlapList[(int)SkillType.Hit_Stamina]}");
         }
 
         Managers.PlayerManager.UpdateUI_Status();
