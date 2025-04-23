@@ -4,36 +4,56 @@ using UnityEngine;
 
 public class PlayerManager
 {
-    float _critRate; //치명타 확률
+    // 치확, 치피, 공격력, 공격속도, 의지, 스태미나
+    float[] _baseStatusArray = { 50f, 50f, 10f, 0.78f, 100f, 100f };
+    List<float> _maxStatusList = new List<float>();
 
-    float _maxCritDamage; //치명타 피해
-    float _maxAttackPower; //공격력
-    float _maxAttackSpeed; //공격 속도
-    float _maxStaminaPoint; //스태미나 수치
-    float _maxWillPoint; //의지 수치
+    public List<float> CurStatusList => _curStatusList;
+    List<float> _curStatusList = new List<float>();
 
     public void Init()
     {
-        _critRate = 50f;
+        _maxStatusList = new List<float>();
+        for (int i = 0; i < _baseStatusArray.Length; i++)
+        {
+            _maxStatusList.Add(_baseStatusArray[i]);
+        }
 
-        _maxCritDamage = 50f;
-        _maxAttackPower = 10f;
-        _maxAttackSpeed = 0.78f;
-        _maxStaminaPoint = 100f;
-        _maxWillPoint = 100f;
+        _curStatusList = new List<float>();
+        for (int i = 0; i < _maxStatusList.Count; i++)
+        {
+            _curStatusList.Add(_maxStatusList[i]);
+        }
     }
 
-    public List<float> GetPlayerStatus()
+    public void UpdateMaxStatus(int index, float buff)
     {
-        List<float> playerStatus = new List<float>();
+        _maxStatusList[index] *= buff;
+        _curStatusList[index] = _maxStatusList[index];
+        Debug.Log($"{(StatusType)index} 영구 증가 적용");
 
-        playerStatus.Add(_critRate);
-        playerStatus.Add(_maxCritDamage);
-        playerStatus.Add(_maxAttackPower);
-        playerStatus.Add(_maxAttackSpeed);
-        playerStatus.Add(_maxStaminaPoint);
-        playerStatus.Add(_maxWillPoint);
+        UpdateUI_Status();
+    }
 
-        return playerStatus;
+    public void UpdateCurStatus(int index, float buff)
+    {
+        _curStatusList[index] *= buff;
+
+        UpdateUI_Status();
+    }
+
+    public void ChangeStatus(int index, float change)
+    {
+        _curStatusList[index] += change;
+        _curStatusList[index] = Mathf.Clamp(_curStatusList[index], 0, _maxStatusList[index]);
+
+        UpdateUI_Status();
+    }
+
+    void UpdateUI_Status()
+    {
+        float percent = _curStatusList[(int)StatusType.Will] / _maxStatusList[(int)StatusType.Will];
+        Managers.UIManager.OnImage_WillUpdateImageEvent?.Invoke(percent);
+        //Debug.Log($"{_curStatusList[(int)StatusType.Will]} / {_maxStatusList[(int)StatusType.Will]}");
     }
 }
