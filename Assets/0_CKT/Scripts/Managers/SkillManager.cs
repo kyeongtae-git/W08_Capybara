@@ -82,7 +82,7 @@ public class SkillManager
                 float n = _skillOverlapList[(int)SkillType.Hit_Will];
                 //초당 공격 횟수
                 float attackNum = Managers.PlayerManager.CurStatusList[3];
-                _willRecoveryPoint = 4 / (n * attackNum) * (1 - Mathf.Pow((float)Math.E, -0.1f * n) * (1 - Mathf.Pow((float)Math.E, -0.1f * attackNum)));
+                _willRecoveryPoint = 9 / ( attackNum) * (1 - Mathf.Pow((float)Math.E, -0.1f * n) * (1 - Mathf.Pow((float)Math.E, -0.1f * attackNum)));
             }
             Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _willRecoveryPoint);
 
