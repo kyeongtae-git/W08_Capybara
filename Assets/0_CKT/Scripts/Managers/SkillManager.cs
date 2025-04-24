@@ -69,7 +69,7 @@ public class SkillManager
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, magni);
 
             magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_AD]);
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _hitMagni);
+            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, magni);
 
             magni = 1 + (1.02f * _skillOverlapList[(int)SkillType.Hit_AS]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, magni);
@@ -87,7 +87,7 @@ public class SkillManager
             Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _willRecoveryPoint);
 
             magni = _recoveryPoint * _skillOverlapList[(int)SkillType.Hit_Stamina];
-            Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, _recoveryPoint);
+            Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, magni);
         }
 
         Managers.PlayerManager.UpdateUI_Status();
