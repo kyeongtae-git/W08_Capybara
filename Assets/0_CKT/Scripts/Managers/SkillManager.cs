@@ -11,9 +11,9 @@ public class SkillManager
     float _holdingTime = 5f;
     float _hitSuccess = 1f;
 
-    float _startMagni = 1.4f;
-    float _hitMagni = 1.04f;
-    float _passiveMagni = 1.15f;
+    float _startMagni = 0.4f;
+    float _hitMagni = 0.04f;
+    float _passiveMagni = 0.15f;
     float _recoveryPoint = 1f;
 
     public void Init()
@@ -36,51 +36,25 @@ public class SkillManager
     public IEnumerator CoStartBuff()
     {
         //버프
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_CD]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, _startMagni);
-        }
-        if (_skillOverlapList[(int)SkillType.Start_CD] > 0)
-            Debug.Log($"전투 시작 : 치명타피해 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Start_CD]}");
+        float cdMagni = 1 + (_startMagni * _skillOverlapList[(int)SkillType.Start_CD]);
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, cdMagni);
 
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AD]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _startMagni);
-        }
-        if (_skillOverlapList[(int)SkillType.Start_AD] > 0)
-            Debug.Log($"전투 시작 : 공격력 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Start_AD]}");
+        float adMagni = 1 + (_startMagni * _skillOverlapList[(int)SkillType.Start_AD]);
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, adMagni);
 
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AS]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, _startMagni);
-        }
-        if (_skillOverlapList[(int)SkillType.Start_AS] > 0)
-            Debug.Log($"전투 시작 : 공격속도 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Start_AS]}");
+        float asMagni = 1 + (_startMagni * _skillOverlapList[(int)SkillType.Start_AS]);
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, asMagni);
 
         Managers.PlayerManager.UpdateUI_Status();
+
         yield return new WaitForSeconds(_holdingTime);
 
         //버프 해제
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_CD]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, (1/ _startMagni));
-        }
-        if (_skillOverlapList[(int)SkillType.Start_CD] > 0)
-            Debug.Log($"지속 시간 종료 : 치명타피해 증가 버프 해제 +{_skillOverlapList[(int)SkillType.Start_CD]}");
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, (1 / cdMagni));
 
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AD]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, (1 / _startMagni));
-        }
-        if (_skillOverlapList[(int)SkillType.Start_AD] > 0)
-            Debug.Log($"지속 시간 종료 : 공격력 증가 버프 해제 +{_skillOverlapList[(int)SkillType.Start_AD]}");
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, (1 / adMagni));
 
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.Start_AS]; i++)
-        {
-            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, (1 / _startMagni));
-        }
-        if (_skillOverlapList[(int)SkillType.Start_AS] > 0)
-            Debug.Log($"지속 시간 종료 : 공격속도 증가 버프 해제 +{_skillOverlapList[(int)SkillType.Start_AS]}");
+        Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, (1 / asMagni));
 
         Managers.PlayerManager.UpdateUI_Status();
     }
@@ -89,26 +63,17 @@ public class SkillManager
     {
         if (Managers.Utils.RandomSuccess(_hitSuccess))
         {
-            for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_CD]; i++)
-            {
-                Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, _hitMagni);
-            }
-            if (_skillOverlapList[(int)SkillType.Hit_CD] > 0)
-                Debug.Log($"적중 시 효과 : 치명타피해 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Hit_CD]}");
+            float magni;
 
-            for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_AD]; i++)
-            {
-                Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _hitMagni);
-            }
-            if (_skillOverlapList[(int)SkillType.Hit_AD] > 0)
-                Debug.Log($"적중 시 효과 : 공격력 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Hit_AD]}");
+            magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_CD]);
+            Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, magni);
 
-            for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_AS]; i++)
-            {
-                Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, _hitMagni);
-            }
-            if (_skillOverlapList[(int)SkillType.Hit_AS] > 0)
-                Debug.Log($"적중 시 효과 : 공격속도 증가 버프 적용 +{_skillOverlapList[(int)SkillType.Hit_AS]}");
+            magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_AD]);
+            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, _hitMagni);
+
+            magni = 1 + (1.02f * _skillOverlapList[(int)SkillType.Hit_AS]);
+            Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, magni);
+
             float _willRecoveryPoint = 0;
             //한번 때릴때마다 채워질 의지 회복량 계산
             if(_skillOverlapList[(int)SkillType.Hit_Will]>0)
@@ -119,19 +84,10 @@ public class SkillManager
                 float attackNum = Managers.PlayerManager.CurStatusList[3];
                 _willRecoveryPoint = 4 / (n * attackNum) * (1 - Mathf.Pow((float)Math.E, -0.1f * n) * (1 - Mathf.Pow((float)Math.E, -0.1f * attackNum)));
             }
-            for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_Will]; i++)
-            {
-                Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _willRecoveryPoint);
-            }
-            if (_skillOverlapList[(int)SkillType.Hit_Will] > 0)
-                Debug.Log($"적중 시 효과 : 의지 획복 +{_skillOverlapList[(int)SkillType.Hit_Will]}");
+            Managers.PlayerManager.ChangeStatus((int)StatusType.Will, _willRecoveryPoint);
 
-            for (int i = 0; i < _skillOverlapList[(int)SkillType.Hit_Stamina]; i++)
-            {
-                Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, _recoveryPoint);
-            }
-            if (_skillOverlapList[(int)SkillType.Hit_Stamina] > 0)
-                Debug.Log($"적중 시 효과 : 스태미나 획복 +{_skillOverlapList[(int)SkillType.Hit_Stamina]}");
+            magni = _recoveryPoint * _skillOverlapList[(int)SkillType.Hit_Stamina];
+            Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, _recoveryPoint);
         }
 
         Managers.PlayerManager.UpdateUI_Status();
@@ -139,26 +95,22 @@ public class SkillManager
 
     public void MaxBuff()
     {
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.P_CD]; i++)
-        {
-            Managers.PlayerManager.UpdateMaxStatus((int)StatusType.CritDamage, _passiveMagni);
-        }
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.P_AD]; i++)
-        {
-            Managers.PlayerManager.UpdateMaxStatus((int)StatusType.ATKDamage, _passiveMagni);
-        }
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.P_AS]; i++)
-        {
-            Managers.PlayerManager.UpdateMaxStatus((int)StatusType.ATKSpeed, _passiveMagni);
-        }
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.P_Will]; i++)
-        {
-            Managers.PlayerManager.UpdateMaxStatus((int)StatusType.Will, _passiveMagni);
-        }
-        for (int i = 0; i < _skillOverlapList[(int)SkillType.P_Stamina]; i++)
-        {
-            Managers.PlayerManager.UpdateMaxStatus((int)StatusType.Stamina, _passiveMagni);
-        }
+        float magni;
+
+        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_CD]);
+        Managers.PlayerManager.UpdateMaxStatus((int)StatusType.CritDamage, magni);
+
+        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_AD]);
+        Managers.PlayerManager.UpdateMaxStatus((int)StatusType.ATKDamage, magni);
+
+        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_AS]);
+        Managers.PlayerManager.UpdateMaxStatus((int)StatusType.ATKSpeed, magni);
+
+        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_Will]);
+        Managers.PlayerManager.UpdateMaxStatus((int)StatusType.Will, magni);
+
+        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_Stamina]);
+        Managers.PlayerManager.UpdateMaxStatus((int)StatusType.Stamina, magni);
 
         Managers.PlayerManager.UpdateUI_Status();
     }

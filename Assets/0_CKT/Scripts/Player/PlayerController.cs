@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
             //의지 감소
             float useWill = Managers.PlayerManager.UseWill;
             Managers.PlayerManager.ChangeStatus((int)StatusType.Will, -useWill * Time.deltaTime);
+            Managers.PlayerManager.UpdateUI_Status();
+
             if (Managers.PlayerManager.CurStatusList[(int)StatusType.Will] <= 0)
             {
                 Managers.GameManager.GameOver();
@@ -66,12 +68,18 @@ public class PlayerController : MonoBehaviour
         float attackTime = 1 / playerStatus[(int)StatusType.ATKSpeed];
         yield return new WaitForSeconds(attackTime);
 
+        //기본 데미지
         float attackDamage = playerStatus[(int)StatusType.ATKDamage];
+
+        //치명타 데미지
         if (Managers.Utils.RandomSuccess(playerStatus[(int)StatusType.CritRate] * 0.01f))
         {
             attackDamage *= (1 + (playerStatus[(int)StatusType.CritDamage] * 0.01f));
         }
 
+        //스태미나 소모
+        Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, -useStamina);
+        //스태미나 0일때 데미지 반감
         if (playerStatus[(int)StatusType.Stamina] <= 0)
         {
             attackDamage *= 0.5f;
@@ -79,8 +87,6 @@ public class PlayerController : MonoBehaviour
 
         //이펙트 재생
         _particle.Play();
-        //스태미나 소모
-        Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, -useStamina);
         //데미지 주기
         Managers.RockManager.OnGetDamageEvent?.Invoke(attackDamage);
         //적중 시 효과

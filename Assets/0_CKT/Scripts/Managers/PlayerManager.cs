@@ -44,6 +44,10 @@ public class PlayerManager
     public void UpdateCurStatus(int index, float buff)
     {
         _curStatusList[index] *= buff;
+        if (index == (int)StatusType.ATKSpeed)
+        {
+            _curStatusList[(int)StatusType.ATKSpeed] = Mathf.Clamp(_curStatusList[(int)StatusType.ATKSpeed], _baseStatusArray[(int)StatusType.ATKSpeed], 10f);
+        }
     }
 
     public void ChangeStatus(int index, float change)
