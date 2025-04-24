@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RockController : MonoBehaviour
 {
+    Canvas _canvas;
+    
     float _maxHealth;
     float _curHealth;
     float _moveSpeed;
@@ -14,6 +16,9 @@ public class RockController : MonoBehaviour
         _moveSpeed = Managers.RockManager.MoveSpeed;
         _stopPoint = Managers.RockManager.StopPoint;
         Managers.RockManager.OnGetDamageEvent += GetDamage;
+
+        _canvas = GetComponentInChildren<Canvas>();
+        _canvas.enabled = false;
     }
 
     private void OnDisable()
@@ -26,6 +31,10 @@ public class RockController : MonoBehaviour
         if (transform.position.x > _stopPoint.x)
         {
             transform.position -= transform.right * _moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            _canvas.enabled = true;
         }
     }
 

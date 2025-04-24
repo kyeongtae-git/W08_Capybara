@@ -46,13 +46,13 @@ public class GameManager
         Debug.Log($"{_stage} 스테이지로 이동");
 
         //이벤트 발생했을 때
-        if ((_stage % _eventCount) == 0)
+        /*if ((_stage % _eventCount) == 0)
         {
             //이벤트 발생 UI 활성화 (스킬 선택은 이벤트 발생의 선택 버튼에서 호출)
             Managers.UIManager.OnUI_EventCanvasEnableEvent?.Invoke(true);
         }
         //이벤트 발생 안 했을 때
-        else
+        else*/
         {
             //스킬 선택 UI 활성화
             Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true);
