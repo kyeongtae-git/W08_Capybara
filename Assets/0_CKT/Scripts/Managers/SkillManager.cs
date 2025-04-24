@@ -71,7 +71,7 @@ public class SkillManager
             magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_AD]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, magni);
 
-            magni = 1 + (1.02f * _skillOverlapList[(int)SkillType.Hit_AS]);
+            magni = 1 + (_hitMagni * 0.5f * _skillOverlapList[(int)SkillType.Hit_AS]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, magni);
 
             float _willRecoveryPoint = 0;
