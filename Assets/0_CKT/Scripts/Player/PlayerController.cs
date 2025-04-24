@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     Coroutine _coAttack;
     Coroutine _coStartBuff;
+
+    Animator _animator;
 
     void Start()
     {
@@ -21,18 +23,22 @@ public class PlayerController : MonoBehaviour
 
         _coAttack = null;
         _coStartBuff = null;
+
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("isWalk",true);
     }
 
     void Update()
     {
         if (Managers.GameManager.CurGameState == GameState.Fight)
         {
+            _animator.SetBool("isWalk", false);
             List<float> playerStatusList = Managers.PlayerManager.CurStatusList.ToList();
             float useStamina = Managers.PlayerManager.UseStamina;
             _coStartBuff = _coStartBuff ?? StartCoroutine(Managers.SkillManager.CoStartBuff());
             _coAttack = _coAttack ?? StartCoroutine(TakeDamage(playerStatusList, useStamina));
 
-            //ÀÇÁö °¨¼Ò
+            //ì˜ì§€ ê°ì†Œ
             float useWill = Managers.PlayerManager.UseWill;
             Managers.PlayerManager.ChangeStatus((int)StatusType.Will, -useWill * Time.deltaTime);
             if (Managers.PlayerManager.CurStatusList[(int)StatusType.Will] <= 0)
@@ -45,16 +51,17 @@ public class PlayerController : MonoBehaviour
             if (_coAttack != null)
             {
                 StopCoroutine(_coAttack);
-                
             }
             _coStartBuff = null;
             _coAttack = null;
+            _animator.SetBool("isWalk", true);
         }
     }
 
     IEnumerator TakeDamage(List<float> playerStatus, float useStamina)
     {
-        //TODO : °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+        //TODO : ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+        _animator.SetTrigger("attack");
 
         float attackTime = 1 / playerStatus[(int)StatusType.ATKSpeed];
         yield return new WaitForSeconds(attackTime);
@@ -70,13 +77,13 @@ public class PlayerController : MonoBehaviour
             attackDamage *= 0.5f;
         }
 
-        //ÀÌÆåÆ® Àç»ı
+        //ì´í™íŠ¸ ì¬ìƒ
         _particle.Play();
-        //½ºÅÂ¹Ì³ª ¼Ò¸ğ
+        //ìŠ¤íƒœë¯¸ë‚˜ ì†Œëª¨
         Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, -useStamina);
-        //µ¥¹ÌÁö ÁÖ±â
+        //ë°ë¯¸ì§€ ì£¼ê¸°
         Managers.RockManager.OnGetDamageEvent?.Invoke(attackDamage);
-        //ÀûÁß ½Ã È¿°ú
+        //ì ì¤‘ ì‹œ íš¨ê³¼
         Managers.SkillManager.HitBuff();
 
         _coAttack = null;

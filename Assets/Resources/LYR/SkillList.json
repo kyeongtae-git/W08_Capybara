@@ -1,0 +1,82 @@
+{
+  "skills": [
+    {
+      "name": "파훼법이 보여!",
+      "type": "Start_CD",
+      "explaintext": "전투 시작 시 : 치명타 피해 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "시작이 반이다",
+      "type": "Start_AD",
+      "explaintext": "전투 시작 시 : 공격력 증가 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "초반 스퍼트",
+      "type": "Start_AS",
+      "explaintext": "전투 시작 시 : 공격속도 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "때린 곳 또 때리기",
+      "type": "Hit_CD",
+      "explaintext": "적중 시 : 치명타피해 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "곡괭이 숙련",
+      "type": "Hit_AD",
+      "explaintext": "적중 시 : 공격력 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "무념무상",
+      "type": "Hit_AS",
+      "explaintext": "적중 시 : 공격 속도 증가 버프 적용",
+      "increaseValue": 0
+    },
+    {
+      "name": "하다 보니 재미있는데?",
+      "type": "Hit_Will",
+      "explaintext": "적중 시 : 의지 회복",
+      "increaseValue": 0
+    },
+    {
+      "name": "광질이야말로 최고의 휴식이야!",
+      "type": "Hit_Stamina",
+      "explaintext": "적중 시 : 스테미나 회복",
+      "increaseValue": 0
+    },
+    {
+      "name": "암석 연구",
+      "type": "P_CD",
+      "explaintext": "플레이어 기본 치명타 데미지 증가",
+      "increaseValue": 0
+    },
+    {
+      "name": "보양식",
+      "type": "P_AD",
+      "explaintext": "플레이어 기본 공격력 증가",
+      "increaseValue": 0
+    },    
+    {
+      "name": "빛보다 빠르게",
+      "type": "P_AS",
+      "explaintext": " : 플레이어 기본 공격 속도 증가",
+      "increaseValue": 0
+    },    
+    {
+      "name": "에메랄드의 꿈",
+      "type": "P_Will",
+      "explaintext": " : 플레이어 기본 의지 증가",
+      "increaseValue": 0
+    },
+    {
+      "name": "#오운완",
+      "type": "P_Stamina",
+      "explaintext": " : 플레이어 기본 스테미나 증가",
+      "increaseValue": 0
+    }
+  ]
+}

@@ -14,7 +14,7 @@ public class PlayerManager
     List<float> _curStatusList = new List<float>();
 
     public float UseWill => _useWill;
-    float _useWill = 5f;
+    float _useWill = 10f;
 
     public float UseStamina => _useStamina;
     float _useStamina = 10f;
