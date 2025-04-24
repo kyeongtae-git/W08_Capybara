@@ -16,7 +16,7 @@ public class SkillManager
     float _passiveMagni = 0.15f;
     float _recoveryPoint = 1f;
 
-    float _willRecoveryCap = 2f;
+    float _willRecoveryCap = 5f;
 
     public void Init()
     {
@@ -38,7 +38,7 @@ public class SkillManager
     public IEnumerator CoStartBuff()
     {
         //버프
-        float cdMagni = 1 + (_startMagni * _skillOverlapList[(int)SkillType.Start_CD]);
+        float cdMagni = 1 + (_startMagni * 1.5f * _skillOverlapList[(int)SkillType.Start_CD]);
         Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, cdMagni);
 
         float adMagni = 1 + (_startMagni * _skillOverlapList[(int)SkillType.Start_AD]);
@@ -67,13 +67,13 @@ public class SkillManager
         {
             float magni;
 
-            magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_CD]);
+            magni = 1 + (_hitMagni * 1.5f * _skillOverlapList[(int)SkillType.Hit_CD]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.CritDamage, magni);
 
             magni = 1 + (_hitMagni * _skillOverlapList[(int)SkillType.Hit_AD]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKDamage, magni);
 
-            magni = 1 + (_hitMagni * 0.66f * _skillOverlapList[(int)SkillType.Hit_AS]);
+            magni = 1 + (_hitMagni * 0.5f * _skillOverlapList[(int)SkillType.Hit_AS]);
             Managers.PlayerManager.UpdateCurStatus((int)StatusType.ATKSpeed, magni);
 
             float _willRecoveryPoint = 0;
@@ -99,7 +99,7 @@ public class SkillManager
     {
         float magni;
 
-        magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_CD]);
+        magni = 1 + (_passiveMagni * 1.5f * _skillOverlapList[(int)SkillType.P_CD]);
         Managers.PlayerManager.UpdateMaxStatus((int)StatusType.CritDamage, magni);
 
         magni = 1 + (_passiveMagni * _skillOverlapList[(int)SkillType.P_AD]);

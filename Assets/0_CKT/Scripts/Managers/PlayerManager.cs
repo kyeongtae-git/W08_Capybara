@@ -10,7 +10,6 @@ public class PlayerManager
     List<float> _maxStatusList = new List<float>();
 
     public List<float> CurStatusList => _curStatusList;
-
     List<float> _curStatusList = new List<float>();
 
     public float UseWill => _useWill;
@@ -46,7 +45,7 @@ public class PlayerManager
         _curStatusList[index] *= buff;
         if (index == (int)StatusType.ATKSpeed)
         {
-            _curStatusList[(int)StatusType.ATKSpeed] = Mathf.Clamp(_curStatusList[(int)StatusType.ATKSpeed], _baseStatusArray[(int)StatusType.ATKSpeed], 10f);
+            _curStatusList[(int)StatusType.ATKSpeed] = Mathf.Clamp(_curStatusList[(int)StatusType.ATKSpeed], _baseStatusArray[(int)StatusType.ATKSpeed], 15f);
         }
     }
 

@@ -12,7 +12,7 @@ public class GameManager
     public int Stage => _stage;
     int _stage;
 
-    int _eventCount = 3;
+    //int _eventCount = 3;
 
     public void Init()
     {
