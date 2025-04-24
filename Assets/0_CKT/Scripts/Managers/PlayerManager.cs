@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerManager
 {
     // 치확, 치피, 공격력, 공격속도, 의지, 스태미나
-    float[] _baseStatusArray = { 50f, 50f, 10f, 0.78f, 100f, 100f };
+    float[] _baseStatusArray = { 66f, 50f, 10f, 0.78f, 100f, 100f };
     List<float> _maxStatusList = new List<float>();
 
     public List<float> CurStatusList => _curStatusList;
@@ -17,7 +17,7 @@ public class PlayerManager
     float _useWill = 9f;
 
     public float UseStamina => _useStamina;
-    float _useStamina = 10f;
+    float _useStamina = 8.5f;
 
     public void Init()
     {
