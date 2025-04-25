@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9ba5a6d818e7112468420e021317de2f
+guid: 05d40d122467194409592cab40de772e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5616547497037496821
-    second: Hit_CD_0
+      213: 4033242271286071241
+    second: Condition_CR_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hit_CD_0
+      name: Condition_CR_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 590
+        height: 570
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0e78f62fc30e02b0800000000000000
-      internalID: -5616547497037496821
+      spriteID: 9cf88190a74f8f730800000000000000
+      internalID: 4033242271286071241
       vertices: []
       indices: 
       edges: []

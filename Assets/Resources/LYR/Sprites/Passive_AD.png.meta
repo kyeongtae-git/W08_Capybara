@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9ba5a6d818e7112468420e021317de2f
+guid: 9bf3564d1c46d5d4bba4e3ab51b6f9f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5616547497037496821
-    second: Hit_CD_0
+      213: 754936286035832583
+    second: Passive_AD_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hit_CD_0
+      name: Passive_AD_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0e78f62fc30e02b0800000000000000
-      internalID: -5616547497037496821
+      spriteID: 70fe7356d821a7a00800000000000000
+      internalID: 754936286035832583
       vertices: []
       indices: 
       edges: []
