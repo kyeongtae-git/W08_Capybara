@@ -30,7 +30,6 @@ public enum StatusType
     Stamina
 }
 
-
 public class Enums : MonoBehaviour
 {
 

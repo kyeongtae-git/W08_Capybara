@@ -6,7 +6,7 @@ public class PlayerManager
     int[] _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
 
     //치확
-    float _baseCritRate = 10f;
+    float _baseCritRate = 33f;
     float _curCritRate;
 
     //치피
@@ -40,7 +40,7 @@ public class PlayerManager
     //효과별 계수
     float _passiveCoeff = 0.15f;
     float _conditionCoeff = 0.4f;
-    float _hitCoeff = 0.1f;
+    float _hitCoeff = 0.05f;
 
     public void Init()
     {
@@ -57,6 +57,7 @@ public class PlayerManager
     public void LevelUpSkill(int index)
     {
         _skillLevelArray[index]++;
+        PlayerStatus();
     }
 
     //현재 (치확, 치피, 공격력, 공격속도) 계산 && UI 갱신
@@ -70,7 +71,7 @@ public class PlayerManager
 
         //최대값 제한
         _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
-        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 15f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 20f);
 
         //UI 갱신
         Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
@@ -120,8 +121,6 @@ public class PlayerManager
     //최종 피해량 계산
     public float GetFinalDamage()
     {
-        PlayerStatus();
-
         //기본 데미지
         float damage = _curATKDamage;
         //치명타 데미지
@@ -137,6 +136,8 @@ public class PlayerManager
         //스태미나 소모
         _staminaPoint -= _staminaDownSpeed;
         Managers.UIManager.OnUpdateStaminaPointUIEvent?.Invoke(_staminaPoint / _maxStaminaPoint);
+
+        PlayerStatus();
 
         return damage;
     }

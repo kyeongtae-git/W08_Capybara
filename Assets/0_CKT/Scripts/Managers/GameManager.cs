@@ -49,7 +49,7 @@ public class GameManager
         {
             //스킬 선택 UI 활성화
             Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true);
-            Managers.UIManager.OnButton_SelectSkillSetEvent?.Invoke();
+            //Managers.UIManager.OnButton_SelectSkillSetEvent?.Invoke();
         }
     }
 
