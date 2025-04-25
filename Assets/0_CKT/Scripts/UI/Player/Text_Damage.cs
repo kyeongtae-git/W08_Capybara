@@ -7,12 +7,16 @@ public class Text_Damage : MonoBehaviour
     TextMeshProUGUI _damageTMP;
     Coroutine _coUpdateUI;
 
+    float _normalSize = 50f;
+    float _critSize = 100f;
+
     void Start()
     {
         _damageTMP = GetComponent<TextMeshProUGUI>();
         _damageTMP.enabled = false;
 
         Managers.UIManager.OnDamageUIEvent += UpdateUI;
+        Managers.UIManager.OnCritUIEvent += CritText;
     }
 
     void UpdateUI(float damage)
@@ -33,5 +37,10 @@ public class Text_Damage : MonoBehaviour
 
         _damageTMP.enabled = false;
         _coUpdateUI = null;
+    }
+
+    void CritText(bool crit)
+    {
+        _damageTMP.fontSize = (crit) ? _critSize : _normalSize;
     }
 }
