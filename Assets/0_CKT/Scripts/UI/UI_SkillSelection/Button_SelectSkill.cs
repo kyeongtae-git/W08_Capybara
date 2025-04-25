@@ -8,11 +8,13 @@ public class Button_SelectSkill : MonoBehaviour
     int _skillID;
     Button _selectSkillButton;
     GetSkillList _skillList;
+    AcquiredSkills _acquiredskill;
 
     void Start()
     {
         _selectSkillButton = GetComponent<Button>();
         _skillList = FindAnyObjectByType<GetSkillList>();
+        _acquiredskill = FindAnyObjectByType<AcquiredSkills>();
         SetSkill();
 
         Managers.UIManager.OnButton_SelectSkillSetEvent += SetSkill;
@@ -26,8 +28,10 @@ public class Button_SelectSkill : MonoBehaviour
         TextMeshProUGUI skillexplain = transform.Find("SkillExplain").GetComponent<TextMeshProUGUI>();
 
         SkillType skillType = (SkillType)_skillID;
-        string skillTypestring =skillType.ToString();
+        string skillTypestring = skillType.ToString();
         Skill skill;
+
+        
 
         if(_skillList.TryGetSkill(skillTypestring, out skill))
         {
@@ -41,6 +45,8 @@ public class Button_SelectSkill : MonoBehaviour
 
         _selectSkillButton.onClick.RemoveAllListeners();
         _selectSkillButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(false));
+        _selectSkillButton.onClick.AddListener(() => Managers.SkillManager.OverlapSkill(_skillID));
+        _selectSkillButton.onClick.AddListener(() => _acquiredskill.AssignSkill(skill.type));
         _selectSkillButton.onClick.AddListener(() => Managers.PlayerManager.LevelUpSkill(_skillID));
         _selectSkillButton.onClick.AddListener(() => StartCoroutine(Managers.GameManager.StartStage()));
     }
