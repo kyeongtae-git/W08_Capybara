@@ -45,7 +45,7 @@ public class RockHealthDataLoader : MonoBehaviour
         rockHealthData = Resources.Load<RockHealthData>("KMJ/RockHealthDataTable");
 
         //csvFile로 데이터 초기화하기
-        rockHealthData.MakeDictionary(LoadList());            
+        rockHealthData.MakeDictionary(LoadList());
     }
 
     public float LoadHealthData(int stageNum)
