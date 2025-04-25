@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,9 +51,11 @@ public class AcquiredSkills : MonoBehaviour
 
         // 자식 오브젝트에서 Image 컴포넌트 가져와 스프라이트 세팅
         Image img = slot.GetComponentInChildren<Image>();
+        TextMeshProUGUI text = slot.GetComponentInChildren<TextMeshProUGUI>();
         if (img != null)
         {
             img.enabled = true;
+            text.enabled = true;
             img.sprite = _skillImage.GetSprite(skillType+"_0");
         }
         else

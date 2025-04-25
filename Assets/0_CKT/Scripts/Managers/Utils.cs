@@ -1,44 +1,44 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class Utils
 {
     /// <summary>
-    /// success È®·ü·Î ¼º°ø
+    /// success í™•ë¥ ë¡œ ì„±ê³µ
     /// </summary>
     public bool RandomSuccess(float success)
     {
         success = Mathf.Clamp(success, 0, 1);
-        float randomValue = UnityEngine.Random.value; // 0.0f¿¡¼­ 1.0f »çÀÌÀÇ ·£´ı °ªÀ» »ı¼º
+        float randomValue = UnityEngine.Random.value; // 0.0fì—ì„œ 1.0f ì‚¬ì´ì˜ ëœë¤ ê°’ì„ ìƒì„±
 
-        if (randomValue <= success) return true; // ¼º°ø
-        else return false; // ½ÇÆĞ
+        if (randomValue <= success) return true; // ì„±ê³µ
+        else return false; // ì‹¤íŒ¨
     }
 
     public List<int> GetRandomNumbers(int min, int max, int count)
     {
-        // À¯È¿¼º °Ë»ç
+        // ìœ íš¨ì„± ê²€ì‚¬
         if ((count > (max - min + 1)) || (count < 0))
         {
-            Debug.LogError("»ÌÀ» ¼ıÀÚ °³¼ö°¡ ¹üÀ§¸¦ ÃÊ°úÇÏ°Å³ª À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.LogError("ë½‘ì„ ìˆ«ì ê°œìˆ˜ê°€ ë²”ìœ„ë¥¼ ì´ˆê³¼í•˜ê±°ë‚˜ ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return new List<int>();
         }
 
         List<int> numbers = new List<int>();
         List<int> results = new List<int>();
 
-        // ¼ıÀÚ ¸®½ºÆ® »ı¼º
-        for (int i = min; i <= max; i++)
+        // ìˆ«ì ë¦¬ìŠ¤íŠ¸ ìƒì„±
+        for (int i = min; i < max; i++)
         {
             numbers.Add(i);
         }
 
-        // ¹«ÀÛÀ§·Î ¼ıÀÚ ¼±ÅÃ
+        // ë¬´ì‘ìœ„ë¡œ ìˆ«ì ì„ íƒ
         for (int i = 0; i < count; i++)
         {
             int randomIndex = Random.Range(0, numbers.Count);
             results.Add(numbers[randomIndex]);
-            numbers.RemoveAt(randomIndex); // Áßº¹ ¹æÁö
+            numbers.RemoveAt(randomIndex); // ì¤‘ë³µ ë°©ì§€
         }
 
         return results;
