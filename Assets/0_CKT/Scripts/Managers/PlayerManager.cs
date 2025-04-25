@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerManager
@@ -9,11 +6,11 @@ public class PlayerManager
     int[] _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
 
     //치확
-    float _baseCritRate = 66f;
+    float _baseCritRate = 10f;
     float _curCritRate;
 
     //치피
-    float _baseCritDamage = 50f;
+    float _baseCritDamage = 100f;
     float _curCritDamage;
 
     //공격력
@@ -38,12 +35,12 @@ public class PlayerManager
     //의지 감소 속도
     float _willDownSpeed = 9f;
     //스태미나 감소 속도
-    float _staminaDownSpeed = 8.5f;
+    float _staminaDownSpeed = 10f;
 
     //효과별 계수
     float _passiveCoeff = 0.15f;
     float _conditionCoeff = 0.4f;
-    float _hitCoeff = 0.04f;
+    float _hitCoeff = 0.1f;
 
     public void Init()
     {
@@ -65,11 +62,17 @@ public class PlayerManager
     //현재 (치확, 치피, 공격력, 공격속도) 계산 && UI 갱신
     void PlayerStatus()
     {
+        //스탯 계산
         _curCritRate = CalcCurStatus(_baseCritRate, _skillLevelArray[0], _skillLevelArray[4], _skillLevelArray[8]);
         _curCritDamage = CalcCurStatus(_baseCritDamage, _skillLevelArray[1], _skillLevelArray[5], _skillLevelArray[9]);
         _curATKDamage = CalcCurStatus(_baseATKDamage, _skillLevelArray[2], _skillLevelArray[6], _skillLevelArray[10]);
         _curATKSpeed = CalcCurStatus(_baseATKSpeed, _skillLevelArray[3], _skillLevelArray[7], _skillLevelArray[11]);
 
+        //최대값 제한
+        _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 115f);
+
+        //UI 갱신
         Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
         Managers.UIManager.OnUpdateCritDamageUIEvent?.Invoke(_curCritDamage);
         Managers.UIManager.OnUpdateATKDamageUIEvent?.Invoke(_curATKDamage);
@@ -83,7 +86,12 @@ public class PlayerManager
         int stamina = (_staminaPoint > 0) ? 1 : 0;
         
         float result =
-            (baseStatus * (1 + (_passiveCoeff * passive)) * (1 + (_conditionCoeff * condition * stamina))) + (_hitCoeff * hit * _hitStack);
+            (
+            baseStatus 
+            * (1 + (_passiveCoeff * passive)) 
+            * (1 + (_conditionCoeff * condition * stamina))
+            ) 
+            + (_hitCoeff * hit * _hitStack);
 
         return result;
     }
