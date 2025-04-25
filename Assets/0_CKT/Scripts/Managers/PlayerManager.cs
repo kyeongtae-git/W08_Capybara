@@ -63,14 +63,14 @@ public class PlayerManager
     void PlayerStatus()
     {
         //스탯 계산
-        _curCritRate = CalcCurStatus(_baseCritRate, _skillLevelArray[0], _skillLevelArray[4], _skillLevelArray[8]);
-        _curCritDamage = CalcCurStatus(_baseCritDamage, _skillLevelArray[1], _skillLevelArray[5], _skillLevelArray[9]);
-        _curATKDamage = CalcCurStatus(_baseATKDamage, _skillLevelArray[2], _skillLevelArray[6], _skillLevelArray[10]);
-        _curATKSpeed = CalcCurStatus(_baseATKSpeed, _skillLevelArray[3], _skillLevelArray[7], _skillLevelArray[11]);
+        _curCritRate    = CalcCurStatus(_baseCritRate, 1, _skillLevelArray[0], _skillLevelArray[4], _skillLevelArray[8]);
+        _curCritDamage  = CalcCurStatus(_baseCritDamage, 1, _skillLevelArray[1], _skillLevelArray[5], _skillLevelArray[9]);
+        _curATKDamage   = CalcCurStatus(_baseATKDamage, 1, _skillLevelArray[2], _skillLevelArray[6], _skillLevelArray[10]);
+        _curATKSpeed    = CalcCurStatus(_baseATKSpeed, 1, _skillLevelArray[3], _skillLevelArray[7], _skillLevelArray[11]);
 
         //최대값 제한
         _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
-        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 115f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 15f);
 
         //UI 갱신
         Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
@@ -81,17 +81,17 @@ public class PlayerManager
     }
 
     //스탯 계산식
-    public float CalcCurStatus(float baseStatus, float passive, float condition, float hit)
+    public float CalcCurStatus(float baseStatus, float coeff, float passive, float condition, float hit)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
         
         float result =
             (
             baseStatus 
-            * (1 + (_passiveCoeff * passive)) 
-            * (1 + (_conditionCoeff * condition * stamina))
+            * (1 + (_passiveCoeff * coeff * passive)) 
+            * (1 + (_conditionCoeff * coeff * condition * stamina))
             ) 
-            + (_hitCoeff * hit * _hitStack);
+            + (_hitCoeff * coeff * hit * _hitStack);
 
         return result;
     }
