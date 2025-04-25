@@ -143,6 +143,7 @@ public class PlayerManager
         _hitStack++;
         //스태미나 소모
         _staminaPoint -= _staminaDownSpeed;
+        _staminaPoint = Mathf.Clamp(_staminaPoint, 0, _maxStaminaPoint);
 
         PlayerStatus();
         UpdateUI();
