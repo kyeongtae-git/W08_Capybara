@@ -40,7 +40,7 @@ public class PlayerManager
     //효과별 계수
     float _passiveCoeff = 0.15f;
     float _conditionCoeff = 0.4f;
-    float _hitCoeff = 0.05f;
+    float _hitCoeff = 0.04f;
 
     public void Init()
     {
@@ -64,10 +64,14 @@ public class PlayerManager
     void PlayerStatus()
     {
         //스탯 계산
-        _curCritRate    = CalcCurStatus(_baseCritRate, 1, _skillLevelArray[0], _skillLevelArray[4], _skillLevelArray[8]);
-        _curCritDamage  = CalcCurStatus(_baseCritDamage, 1, _skillLevelArray[1], _skillLevelArray[5], _skillLevelArray[9]);
-        _curATKDamage   = CalcCurStatus(_baseATKDamage, 1, _skillLevelArray[2], _skillLevelArray[6], _skillLevelArray[10]);
-        _curATKSpeed    = CalcCurStatus(_baseATKSpeed, 1, _skillLevelArray[3], _skillLevelArray[7], _skillLevelArray[11]);
+        _curCritRate    
+            = CalcCurStatus(_baseCritRate, 0.15f, _skillLevelArray[0], 0.4f, _skillLevelArray[4], 0.4f, _skillLevelArray[8]);
+        _curCritDamage  
+            = CalcCurStatus(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.4f, _skillLevelArray[5], 0.08f, _skillLevelArray[9]);
+        _curATKDamage   
+            = CalcCurStatus(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.4f, _skillLevelArray[6], 0.04f, _skillLevelArray[10]);
+        _curATKSpeed    
+            = CalcCurStatus(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.4f, _skillLevelArray[7], 0.02f, _skillLevelArray[11]);
 
         //최대값 제한
         _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
@@ -82,17 +86,17 @@ public class PlayerManager
     }
 
     //스탯 계산식
-    public float CalcCurStatus(float baseStatus, float coeff, float passive, float condition, float hit)
+    public float CalcCurStatus(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
         
         float result =
             (
             baseStatus 
-            * (1 + (_passiveCoeff * coeff * passive)) 
-            * (1 + (_conditionCoeff * coeff * condition * stamina))
+            * (1 + (passiveCoeff * passiveLevel)) 
+            * (1 + (conditionCoeff * conditionLevel * stamina))
             ) 
-            + (_hitCoeff * coeff * hit * _hitStack);
+            + (hitCoeff * hitLevel * _hitStack);
 
         return result;
     }
