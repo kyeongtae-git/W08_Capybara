@@ -7,7 +7,7 @@ public class UIManager
     public Action<bool> OnUI_EventCanvasEnableEvent;
 
     public Action<bool> OnUI_SkillSelectionCanvasEnableEvent;
-    public Action OnButton_SelectSkillSetEvent;
+    public Action<int> OnButton_SelectSkillSetEvent;
 
     public Action<int> OnUpdateStageUIEvent;
     public Action<float> OnUpdateCritRateUIEvent;
@@ -17,6 +17,7 @@ public class UIManager
     public Action<float> OnUpdateWillPointUIEvent;
     public Action<float> OnUpdateStaminaPointUIEvent;
 
+    public Action<float> OnDamageUIEvent;
     public Action<float> OnUpdateRockHealthUIEvent;
 
     public void Init()

@@ -64,10 +64,12 @@ public class PlayerController : MonoBehaviour
 
         //이펙트 재생
         _particle.Play();
-
-        //데미지 주기
+        
         float damage = Managers.PlayerManager.GetFinalDamage();
+        //데미지 주기
         Managers.RockManager.OnGetDamageEvent?.Invoke(damage);
+        //데미지 표시
+        Managers.UIManager.OnDamageUIEvent?.Invoke(damage);
 
         _coAttack = null;
     }
