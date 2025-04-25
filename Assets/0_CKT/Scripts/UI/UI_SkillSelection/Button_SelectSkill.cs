@@ -45,7 +45,6 @@ public class Button_SelectSkill : MonoBehaviour
 
         _selectSkillButton.onClick.RemoveAllListeners();
         _selectSkillButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(false));
-        _selectSkillButton.onClick.AddListener(() => Managers.SkillManager.OverlapSkill(_skillID));
         _selectSkillButton.onClick.AddListener(() => _acquiredskill.AssignSkill(skill.type));
         _selectSkillButton.onClick.AddListener(() => Managers.PlayerManager.LevelUpSkill(_skillID));
         _selectSkillButton.onClick.AddListener(() => StartCoroutine(Managers.GameManager.StartStage()));
