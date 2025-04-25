@@ -9,6 +9,11 @@ public class TitleManager : MonoBehaviour
         SceneManager.LoadScene("MainScene_1");
     }
 
+    public void OnMainButtonClick()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
 
     public void OnExitButtonClick()
     {
