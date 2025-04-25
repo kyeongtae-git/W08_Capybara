@@ -16,6 +16,8 @@ public class AcquiredSkills : MonoBehaviour
     private HashSet<GameObject> usedObjects = new HashSet<GameObject>();
 
 
+    private Dictionary<string, int> skillCallCounts = new Dictionary<string, int>();
+
 
     void Start()
     {
@@ -30,6 +32,18 @@ public class AcquiredSkills : MonoBehaviour
     public void AssignSkill(string skillType)
     {
         Debug.Log("실행된 스킬 타입" + skillType);
+
+        if (skillCallCounts.ContainsKey(skillType))
+        {
+            skillCallCounts[skillType]++;
+        }
+        else
+        {
+            skillCallCounts[skillType] = 1;
+        }
+        Debug.Log($"스킬 '{skillType}' 호출 횟수: {skillCallCounts[skillType]}");
+
+
         // 이미 같은 스킬 타입이 할당된 적 있으면 무시
         if (assignedSkillObjects.ContainsKey(skillType))
         {
@@ -57,6 +71,7 @@ public class AcquiredSkills : MonoBehaviour
             img.enabled = true;
             text.enabled = true;
             img.sprite = _skillImage.GetSprite(skillType+"_0");
+            text.text = $"{ skillCallCounts[skillType]}";
         }
         else
         {
