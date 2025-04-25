@@ -37,7 +37,7 @@ public class Managers : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(_instance);
+            //DontDestroyOnLoad(_instance);
         }
         else
         {
@@ -52,11 +52,5 @@ public class Managers : MonoBehaviour
         RockManager.Init();
         EventManager.Init();
         SkillManager.Init();
-    }
-
-    private void Start()
-    {
-        PlayerManager.UpdateUI_Status();
-        GameManager.LateInit();
     }
 }

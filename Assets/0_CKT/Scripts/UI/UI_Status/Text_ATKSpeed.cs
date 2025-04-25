@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,11 +8,11 @@ public class Text_ATKSpeed : MonoBehaviour
     void Start()
     {
         _atkSpeedTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateATKSpeedUIEvent += UpdateUI;
     }
 
-    void UpdateUI(List<float> list)
+    void UpdateUI(float atkSpeed)
     {
-        _atkSpeedTMP.text = list[(int)StatusType.ATKSpeed].ToString("N2");
+        _atkSpeedTMP.text = atkSpeed.ToString("N2");
     }
 }

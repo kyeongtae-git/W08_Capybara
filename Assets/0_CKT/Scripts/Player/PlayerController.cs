@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     ParticleSystem _particle;
 
     Coroutine _coAttack;
-    Coroutine _coStartBuff;
 
     Animator _animator;
 
@@ -22,7 +21,6 @@ public class PlayerController : MonoBehaviour
         _particle = GetComponentInChildren<ParticleSystem>();
 
         _coAttack = null;
-        _coStartBuff = null;
 
         _animator = GetComponent<Animator>();
         _animator.SetBool("isWalk",true);
@@ -33,17 +31,13 @@ public class PlayerController : MonoBehaviour
         if (Managers.GameManager.CurGameState == GameState.Fight)
         {
             _animator.SetBool("isWalk", false);
-            List<float> playerStatusList = Managers.PlayerManager.CurStatusList.ToList();
-            float useStamina = Managers.PlayerManager.UseStamina;
-            _coStartBuff = _coStartBuff ?? StartCoroutine(Managers.SkillManager.CoStartBuff());
-            _coAttack = _coAttack ?? StartCoroutine(TakeDamage(playerStatusList, useStamina));
+
+            _coAttack = _coAttack ?? StartCoroutine(TakeDamage());
 
             //의지 감소
-            float useWill = Managers.PlayerManager.UseWill;
-            Managers.PlayerManager.ChangeStatus((int)StatusType.Will, -useWill * Time.deltaTime);
-            Managers.PlayerManager.UpdateUI_Status();
+            Managers.PlayerManager.DecreaseWill();
 
-            if (Managers.PlayerManager.CurStatusList[(int)StatusType.Will] <= 0)
+            if (Managers.PlayerManager.RunOutOfWill())
             {
                 Managers.GameManager.GameOver();
             }
@@ -54,43 +48,26 @@ public class PlayerController : MonoBehaviour
             {
                 StopCoroutine(_coAttack);
             }
-            _coStartBuff = null;
             _coAttack = null;
             _animator.SetBool("isWalk", true);
         }
     }
 
-    IEnumerator TakeDamage(List<float> playerStatus, float useStamina)
+    IEnumerator TakeDamage()
     {
         //TODO : 공격 애니메이션 재생
         _animator.SetTrigger("attack");
 
-        float attackTime = 1 / playerStatus[(int)StatusType.ATKSpeed];
-        yield return new WaitForSeconds(attackTime);
-
-        //기본 데미지
-        float attackDamage = playerStatus[(int)StatusType.ATKDamage];
-
-        //치명타 데미지
-        if (Managers.Utils.RandomSuccess(playerStatus[(int)StatusType.CritRate] * 0.01f))
-        {
-            attackDamage *= (1 + (playerStatus[(int)StatusType.CritDamage] * 0.01f));
-        }
-
-        //스태미나 소모
-        Managers.PlayerManager.ChangeStatus((int)StatusType.Stamina, -useStamina);
-        //스태미나 0일때 데미지 반감
-        if (playerStatus[(int)StatusType.Stamina] <= 0)
-        {
-            attackDamage *= 0.5f;
-        }
+        //공격속도
+        float atkTime = Managers.PlayerManager.GetAttackTime();
+        yield return new WaitForSeconds(atkTime);
 
         //이펙트 재생
         _particle.Play();
+
         //데미지 주기
-        Managers.RockManager.OnGetDamageEvent?.Invoke(attackDamage);
-        //적중 시 효과
-        Managers.SkillManager.HitBuff();
+        float damage = Managers.PlayerManager.GetFinalDamage();
+        Managers.RockManager.OnGetDamageEvent?.Invoke(damage);
 
         _coAttack = null;
     }

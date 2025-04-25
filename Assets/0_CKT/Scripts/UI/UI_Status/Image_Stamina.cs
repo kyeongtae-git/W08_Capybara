@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +8,11 @@ public class Image_Stamina : MonoBehaviour
     void Start()
     {
         _staminaImage = GetComponent<Image>();
-        Managers.UIManager.OnUpdateStatusUIEvent += UpdateImage;
+        Managers.UIManager.OnUpdateStaminaPointUIEvent += UpdateImage;
     }
 
-    void UpdateImage(List<float> list)
+    void UpdateImage(float amount)
     {
-        _staminaImage.fillAmount = list[(int)StatusType.Stamina];
+        _staminaImage.fillAmount = amount;
     }
 }

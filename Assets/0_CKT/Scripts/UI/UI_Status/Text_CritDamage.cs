@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,11 +8,11 @@ public class Text_CritDamage : MonoBehaviour
     void Start()
     {
         _critDamageTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateCritDamageUIEvent += UpdateUI;
     }
 
-    void UpdateUI(List<float> list)
+    void UpdateUI(float critDamage)
     {
-        _critDamageTMP.text = list[(int)StatusType.CritDamage].ToString("N2");
+        _critDamageTMP.text = critDamage.ToString("N2");
     }
 }

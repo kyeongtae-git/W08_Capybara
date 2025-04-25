@@ -20,11 +20,6 @@ public class GameManager
         _stage = 1;
     }
 
-    public void LateInit()
-    {
-        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
-    }
-
     public void GameOver()
     {
         _curGameState = GameState.Idle;
@@ -38,8 +33,6 @@ public class GameManager
 
         //스탯 기본 상태로 초기화
         Managers.PlayerManager.Init();
-        //영구 스킬 효과 다시 적용
-        Managers.SkillManager.MaxBuff();
 
         _stage++;
         Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
@@ -64,11 +57,6 @@ public class GameManager
     {
         //스탯 기본 상태로 초기화
         Managers.PlayerManager.Init();
-        //영구 스킬 효과 다시 적용
-        Managers.SkillManager.MaxBuff();
-
-        // n초 동안 흙파는 애니메이션 재생
-
 
         // 적당한 거리에 돌 생성
         //55스테이지라면 에메랄드 바위 생성하기
@@ -76,9 +64,6 @@ public class GameManager
         Vector3 spawnPoint = Managers.RockManager.SpawnPoint;
         int index = (_stage > _maxStage) ? 1 : 0;
         Managers.PoolManager.GetPrefabID(index, null, spawnPoint);
-
-        // 뒷 배경 이동
-
 
         // n초 후에 돌 앞에 플레이어 도착
         float moveTime = Managers.RockManager.MoveTime;

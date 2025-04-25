@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +8,11 @@ public class Image_Will : MonoBehaviour
     void Start()
     {
         _willImage = GetComponent<Image>();
-        Managers.UIManager.OnUpdateStatusUIEvent += UpdateImage;
+        Managers.UIManager.OnUpdateWillPointUIEvent += UpdateImage;
     }
 
-    void UpdateImage(List<float> list)
+    void UpdateImage(float amount)
     {
-        _willImage.fillAmount = list[(int)StatusType.Will];
+        _willImage.fillAmount = amount;
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,11 +8,11 @@ public class Text_ATKDamage : MonoBehaviour
     void Start()
     {
         _atkDamageTMP = GetComponent<TextMeshProUGUI>();
-        Managers.UIManager.OnUpdateStatusUIEvent += UpdateUI;
+        Managers.UIManager.OnUpdateATKDamageUIEvent += UpdateUI;
     }
 
-    void UpdateUI(List<float> list)
+    void UpdateUI(float atkDamage)
     {
-        _atkDamageTMP.text = list[(int)StatusType.ATKDamage].ToString("N2");
+        _atkDamageTMP.text = atkDamage.ToString("N2");
     }
 }
