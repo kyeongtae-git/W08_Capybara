@@ -28,7 +28,7 @@ public class UI_SkillSelection : MonoBehaviour
         _canvas.enabled = boolean;
         Debug.Log($"스킬 선택 패널 {boolean}");
 
-        int max = Random.Range(0, System.Enum.GetValues(typeof(SkillType)).Length);
+        int max = System.Enum.GetValues(typeof(SkillType)).Length;
         List<int> list = Managers.Utils.GetRandomNumbers(0, max, _skills.Length);
 
         for (int i = 0; i < _skills.Length; i++)
