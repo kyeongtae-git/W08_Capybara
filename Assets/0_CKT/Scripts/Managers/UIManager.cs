@@ -18,6 +18,7 @@ public class UIManager
     public Action<float> OnUpdateStaminaPointUIEvent;
 
     public Action<float> OnDamageUIEvent;
+    public Action<bool> OnCritUIEvent;
     public Action<float> OnUpdateRockHealthUIEvent;
 
     public void Init()

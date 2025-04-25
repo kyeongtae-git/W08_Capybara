@@ -127,10 +127,13 @@ public class PlayerManager
     {
         //기본 데미지
         float damage = _curATKDamage;
+        Managers.UIManager.OnCritUIEvent?.Invoke(false);
+
         //치명타 데미지
         if (Managers.Utils.RandomSuccess(_curCritRate * 0.01f))
         {
             damage *= (1 + (_curCritDamage * 0.01f));
+            Managers.UIManager.OnCritUIEvent?.Invoke(true);
         }
 
         //---데미지 계산 후 나머지---
