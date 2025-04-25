@@ -11,8 +11,8 @@ public class Image_Stamina : MonoBehaviour
         Managers.UIManager.OnUpdateStaminaPointUIEvent += UpdateImage;
     }
 
-    void UpdateImage(float amount)
+    void UpdateImage(float cur, float max)
     {
-        _staminaImage.fillAmount = amount;
+        _staminaImage.fillAmount = (cur/max);
     }
 }
