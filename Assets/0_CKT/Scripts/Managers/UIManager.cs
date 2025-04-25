@@ -14,8 +14,8 @@ public class UIManager
     public Action<float> OnUpdateCritDamageUIEvent;
     public Action<float> OnUpdateATKDamageUIEvent;
     public Action<float> OnUpdateATKSpeedUIEvent;
-    public Action<float> OnUpdateWillPointUIEvent;
-    public Action<float> OnUpdateStaminaPointUIEvent;
+    public Action<float, float> OnUpdateWillPointUIEvent;
+    public Action<float, float> OnUpdateStaminaPointUIEvent;
 
     public Action<float> OnDamageUIEvent;
     public Action<bool> OnCritUIEvent;

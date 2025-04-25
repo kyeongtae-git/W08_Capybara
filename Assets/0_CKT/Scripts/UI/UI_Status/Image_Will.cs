@@ -11,8 +11,8 @@ public class Image_Will : MonoBehaviour
         Managers.UIManager.OnUpdateWillPointUIEvent += UpdateImage;
     }
 
-    void UpdateImage(float amount)
+    void UpdateImage(float cur, float max)
     {
-        _willImage.fillAmount = amount;
+        _willImage.fillAmount = (cur/max);
     }
 }

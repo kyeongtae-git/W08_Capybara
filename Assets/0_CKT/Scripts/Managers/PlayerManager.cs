@@ -22,12 +22,14 @@ public class PlayerManager
     float _curATKSpeed;
 
     //의지
-    float _maxWillPoint = 100f;
+    float _baseWillPoint = 100f;
     float _willPoint;
+    float _maxWillPoint;
 
     //스태미나
-    float _maxStaminaPoint = 100f;
+    float _baseStaminaPoint = 100f;
     float _staminaPoint;
+    float _maxStaminaPoint;
 
     //적중 횟수
     int _hitStack = 0;
@@ -44,44 +46,43 @@ public class PlayerManager
 
     public void Init()
     {
-        _willPoint = _maxWillPoint;
-        _staminaPoint = _maxStaminaPoint;
         _hitStack = 0;
 
         PlayerStatus();
-        Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint / _maxWillPoint);
-        Managers.UIManager.OnUpdateStaminaPointUIEvent?.Invoke(_staminaPoint / _maxStaminaPoint);
+        _willPoint = _maxWillPoint;
+        _staminaPoint = _maxStaminaPoint;
+        UpdateUI();
     }
 
     //index번째 스킬 레벨업
     public void LevelUpSkill(int index)
     {
         _skillLevelArray[index]++;
+
         PlayerStatus();
+        UpdateUI();
     }
 
-    //현재 (치확, 치피, 공격력, 공격속도) 계산 && UI 갱신
+    //현재 (치확, 치피, 공격력, 공격속도, 최대 의지, 최대 스태미나) 계산
     void PlayerStatus()
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.15f, _skillLevelArray[0], 0.4f, _skillLevelArray[4], 0.4f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.2f, _skillLevelArray[0], 0.7f, _skillLevelArray[4], 0.8f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.4f, _skillLevelArray[5], 0.08f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.2f, _skillLevelArray[1], 0.7f, _skillLevelArray[5], 0.16f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.4f, _skillLevelArray[6], 0.04f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.2f, _skillLevelArray[2], 0.7f, _skillLevelArray[6], 0.12f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.4f, _skillLevelArray[7], 0.02f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.2f, _skillLevelArray[3], 0.7f, _skillLevelArray[7], 0.08f, _skillLevelArray[11]);
+        _maxWillPoint
+            = CalcCurStatus(_baseWillPoint, 0.2f, _skillLevelArray[12], 0, 0, 0, 0);
+        _maxStaminaPoint
+            = CalcCurStatus(_baseStaminaPoint, 0.2f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //최대값 제한
         _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
         _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 20f);
-
-        //UI 갱신
-        Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
-        Managers.UIManager.OnUpdateCritDamageUIEvent?.Invoke(_curCritDamage);
-        Managers.UIManager.OnUpdateATKDamageUIEvent?.Invoke(_curATKDamage);
-        Managers.UIManager.OnUpdateATKSpeedUIEvent?.Invoke(_curATKSpeed);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
@@ -106,7 +107,7 @@ public class PlayerManager
     {
         _willPoint -= _willDownSpeed * Time.deltaTime;
 
-        Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint / _maxWillPoint);
+        Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint, _maxWillPoint);
     }
 
     //의지가 0인지 확인
@@ -142,10 +143,21 @@ public class PlayerManager
         _hitStack++;
         //스태미나 소모
         _staminaPoint -= _staminaDownSpeed;
-        Managers.UIManager.OnUpdateStaminaPointUIEvent?.Invoke(_staminaPoint / _maxStaminaPoint);
 
         PlayerStatus();
+        UpdateUI();
 
         return damage;
+    }
+
+    void UpdateUI()
+    {
+        //UI 갱신
+        Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
+        Managers.UIManager.OnUpdateCritDamageUIEvent?.Invoke(_curCritDamage);
+        Managers.UIManager.OnUpdateATKDamageUIEvent?.Invoke(_curATKDamage);
+        Managers.UIManager.OnUpdateATKSpeedUIEvent?.Invoke(_curATKSpeed);
+        Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint, _maxWillPoint);
+        Managers.UIManager.OnUpdateStaminaPointUIEvent?.Invoke(_staminaPoint, _maxStaminaPoint);
     }
 }
