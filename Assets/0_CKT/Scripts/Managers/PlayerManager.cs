@@ -78,20 +78,20 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 1.5f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 3f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.30f, _skillLevelArray[1], 0.6000f, _skillLevelArray[5], 3f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 6f, _skillLevelArray[9]);
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.15f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.3f, _skillLevelArray[10]);
         
         _curATKSpeed    
-            = MultiplyCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
+            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.03f, _skillLevelArray[11]);
         
         _maxWillPoint
-            = MultiplyCalc(_baseWillPoint, 0.1000f, _skillLevelArray[12], 0, 0, 0, 0);
+            = MultiplyCalc(_baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = MultiplyCalc(_baseStaminaPoint, 0.1500f, _skillLevelArray[13], 0, 0, 0, 0);
+            = MultiplyCalc(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //치명타 확률 100% 초과 시 초과 분의 _overCritCoeff배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
