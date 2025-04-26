@@ -78,17 +78,17 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.2250f, _skillLevelArray[0], 0.4500f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.3000f, _skillLevelArray[4], 0.0150f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0200f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0150f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.0200f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.0150f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0200f, _skillLevelArray[11]);
+            = MultiplyCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0150f, _skillLevelArray[11]);
         _maxWillPoint
-            = CalcCurStatus(_baseWillPoint, 0.1000f, _skillLevelArray[12], 0, 0, 0, 0);
+            = MultiplyCalc(_baseWillPoint, 0.0700f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = CalcCurStatus(_baseStaminaPoint, 0.1500f, _skillLevelArray[13], 0, 0, 0, 0);
+            = MultiplyCalc(_baseStaminaPoint, 0.1500f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //치명타 확률 100% 초과 시 초과 분의 _overCritCoeff배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
@@ -103,17 +103,29 @@ public class PlayerManager
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
-    //스탯 계산식
-    public float CalcCurStatus(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
+    //합연산
+    float SumCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
+    {
+        int stamina = (_staminaPoint > 0) ? 1 : 0;
+
+        float result =
+            baseStatus
+            + ((passiveCoeff * 100f) * passiveLevel)
+            + ((conditionCoeff * 100f) * conditionLevel)
+            + ((hitCoeff * 100) * hitLevel);
+
+        return result;
+    }
+
+    //곱연산
+    float MultiplyCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
         
         float result =
-            (
             baseStatus 
             * (Mathf.Pow((1+ passiveCoeff), passiveLevel)) 
-            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel))
-            ) 
+            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel)) 
             * (1 + (hitCoeff * hitLevel * _hitStack));
 
         return result;
