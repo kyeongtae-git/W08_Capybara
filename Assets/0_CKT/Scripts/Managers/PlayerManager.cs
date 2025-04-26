@@ -68,13 +68,13 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.16f, _skillLevelArray[0], 0.8f, _skillLevelArray[4], 0.8f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.16f, _skillLevelArray[0], 0.7f, _skillLevelArray[4], 0.8f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.16f, _skillLevelArray[1], 0.8f, _skillLevelArray[5], 0.16f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.16f, _skillLevelArray[1], 0.7f, _skillLevelArray[5], 0.16f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.8f, _skillLevelArray[6], 0.12f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.7f, _skillLevelArray[6], 0.12f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.16f, _skillLevelArray[3], 0.8f, _skillLevelArray[7], 0.04f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.16f, _skillLevelArray[3], 0.7f, _skillLevelArray[7], 0.04f, _skillLevelArray[11]);
         _maxWillPoint
             = CalcCurStatus(_baseWillPoint, 0.16f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
@@ -82,7 +82,7 @@ public class PlayerManager
 
         //최대값 제한
         _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
-        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 20f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 15f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 

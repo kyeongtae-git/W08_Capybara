@@ -3,85 +3,85 @@
     {
       "name": "Condition_CR",
       "type": "Condition_CR",
-      "explaintext": "스태미나가 충분할 때 현재 회심의 일격 확률의 40%만큼 증가",
+      "explaintext": "스태미나가 충분할 때 현재 치명타 확률의 70%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "파훼법이 보여!",
       "type": "Condition_CD",
-      "explaintext": "스태미나가 충분할 때 현재 추가 치명타 피해의 40%만큼 증가",
+      "explaintext": "스태미나가 충분할 때 현재 추가 치명타 피해의 70%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "시작이 반이다",
       "type": "Condition_AD",
-      "explaintext": "스태미나가 충분할 때 현재 공격력의 40%만큼 증가",
+      "explaintext": "스태미나가 충분할 때 현재 공격력의 70%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "초반 스퍼트",
       "type": "Condition_AS",
-      "explaintext": "스태미나가 충분할 때 현재 공격 속도의 40%만큼 증가",
+      "explaintext": "스태미나가 충분할 때 현재 공격 속도의 70%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "Passive_CR",
       "type": "Passive_CR",
-      "explaintext": "현재 치명타 확률의 15%만큼 증가",
+      "explaintext": "현재 치명타 확률의 16%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "암석 연구",
       "type": "Passive_CD",
-      "explaintext": "현재 추가 치명타 피해의 15%만큼 증가",
+      "explaintext": "현재 추가 치명타 피해의 16%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "보양식",
       "type": "Passive_AD",
-      "explaintext": "현재 공격력의 15%만큼 증가",
+      "explaintext": "현재 공격력의 16%만큼 증가",
       "increaseValue": 0
     },    
     {
       "name": "빛보다 빠르게",
       "type": "Passive_AS",
-      "explaintext": "현재 공격 속도의 15%만큼 증가",
+      "explaintext": "현재 공격 속도의 16%만큼 증가",
       "increaseValue": 0
     },    
     {
       "name": "Hit_CR",
       "type": "Hit_CR",
-      "explaintext": "공격 적중 시마다 치명타 확률 0.4 증가",
+      "explaintext": "공격 적중 시마다 치명타 확률 0.8 증가",
       "increaseValue": 0
     },
     {
       "name": "때린 곳 또 때리기",
       "type": "Hit_CD",
-      "explaintext": "공격 적중 시마다 추가 치명타 피해 0.08 증가",
+      "explaintext": "공격 적중 시마다 추가 치명타 피해 0.16 증가",
       "increaseValue": 0
     },
     {
       "name": "곡괭이 숙련",
       "type": "Hit_AD",
-      "explaintext": "공격 적중 시마다 공격력 0.04 증가",
+      "explaintext": "공격 적중 시마다 공격력 0.12 증가",
       "increaseValue": 0
     },
     {
       "name": "무념무상",
       "type": "Hit_AS",
-      "explaintext": "공격 적중 시마다 공격 속도 0.02 증가",
+      "explaintext": "공격 적중 시마다 공격 속도 0.04 증가",
       "increaseValue": 0
     },
     {
       "name": "에메랄드의 꿈",
       "type": "Max_Will",
-      "explaintext": "최대 의지 15% 증가",
+      "explaintext": "최대 의지 16% 증가",
       "increaseValue": 0
     },
     {
       "name": "#오운완",
       "type": "Max_Stamina",
-      "explaintext": "최대 스테미나 15% 증가",
+      "explaintext": "최대 스테미나 16% 증가",
       "increaseValue": 0
     }
   ]

@@ -18,7 +18,7 @@ public class RockController : MonoBehaviour
         Managers.RockManager.OnGetDamageEvent += GetDamage;
 
         _canvas = GetComponentInChildren<Canvas>();
-        _canvas.enabled = false;
+        if (_canvas != null) _canvas.enabled = false;
     }
 
     private void OnDisable()
