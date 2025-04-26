@@ -33,7 +33,7 @@ public class Button_SelectSkill : MonoBehaviour
         _aqSkill = FindAnyObjectByType<AcquiredSkills>();
         _skillImage = FindAnyObjectByType<GetSkillImage>();
 
-        Debug.Log(_skillList.name);
+        //Debug.Log(_skillList.name);
         if(_skillList.TryGetSkill(skillTypestring, out skill))
         {
             skillname.text = skill.name;

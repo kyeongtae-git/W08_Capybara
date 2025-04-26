@@ -22,8 +22,8 @@ public class PlayerManager
     float _curATKSpeed;
 
     //데미지 보너스
-    float _baseDamageBonus = 0;
-    float _curDamageBonus;
+    //float _baseDamageBonus = 0;
+    //float _curDamageBonus;
 
     //의지
     float _baseWillPoint = 100f;
@@ -47,9 +47,9 @@ public class PlayerManager
     float _staminaDownSpeed = 5f;
 
     //효과별 계수
-    float _passiveCoeff = 0.15f;
-    float _conditionCoeff = 0.4f;
-    float _hitCoeff = 0.04f;
+    //float _passiveCoeff = 0.15f;
+    //float _conditionCoeff = 0.4f;
+    //float _hitCoeff = 0.04f;
 
     public void Init()
     {
@@ -76,17 +76,17 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.30f, _skillLevelArray[0], 0.44f, _skillLevelArray[4], 1.0f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.20f, _skillLevelArray[0], 0.60f, _skillLevelArray[4], 0.020f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.22f, _skillLevelArray[1], 0.88f, _skillLevelArray[5], 2.0f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.24f, _skillLevelArray[1], 0.72f, _skillLevelArray[5], 0.024f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.64f, _skillLevelArray[6], 0.8f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.48f, _skillLevelArray[6], 0.016f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.12f, _skillLevelArray[3], 0.48f, _skillLevelArray[7], 0.08f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.12f, _skillLevelArray[3], 0.36f, _skillLevelArray[7], 0.012f, _skillLevelArray[11]);
         _maxWillPoint
-            = CalcCurStatus(_baseWillPoint, 0.11f, _skillLevelArray[12], 0, 0, 0, 0);
+            = CalcCurStatus(_baseWillPoint, 0.15f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = CalcCurStatus(_baseStaminaPoint, 0.21f, _skillLevelArray[13], 0, 0, 0, 0);
+            = CalcCurStatus(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //치명타 확률 100% 초과 시 초과 분의 2배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
@@ -109,10 +109,10 @@ public class PlayerManager
         float result =
             (
             baseStatus 
-            * (1 + (passiveCoeff * passiveLevel)) 
-            * (1 + (conditionCoeff * conditionLevel * stamina))
+            * (Mathf.Pow((1+ passiveCoeff), passiveLevel)) 
+            * (Mathf.Pow(((1 + conditionCoeff) * stamina), conditionLevel))
             ) 
-            + (hitCoeff * hitLevel * _hitStack);
+            * (1 + (hitCoeff * hitLevel * _hitStack));
 
         return result;
     }
