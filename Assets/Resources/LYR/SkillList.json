@@ -3,85 +3,85 @@
     {
       "name": "컨디션 만땅",
       "type": "Condition_CR",
-      "explaintext": "스태미나가 0 초과일 때 현재 치명타 확률의 45%만큼 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
+      "explaintext": "스태미나가 0 초과일 때 치명타 확률이 현재 수치의 60%만큼 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
       "name": "파훼법이 보여!",
       "type": "Condition_CD",
-      "explaintext": "스태미나가 0 초과일 때 현재 추가 치명타 피해의 30%만큼 증가",
+      "explaintext": "스태미나가 0 초과일 때 추가 치명타 피해가 현재 수치의 30%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "시작이 반이다",
       "type": "Condition_AD",
-      "explaintext": "스태미나가 0 초과일 때 현재 공격력의 30%만큼 증가",
+      "explaintext": "스태미나가 0 초과일 때 공격력이 현재 수치의 30%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "초반 스퍼트",
       "type": "Condition_AS",
-      "explaintext": "스태미나가 0 초과일 때 현재 공격 속도의 30%만큼 증가 (최대 공격 속도 : 12)",
+      "explaintext": "스태미나가 0 초과일 때 공격 속도가 현재 수치의 30%만큼 증가 (최대 공격 속도 : 12)",
       "increaseValue": 0
     },
     {
       "name": "민첩성의 망토",
       "type": "Passive_CR",
-      "explaintext": "현재 치명타 확률의 22.5%만큼 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
+      "explaintext": "치명타 확률이 현재 수치의 30%만큼 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
       "name": "암석 연구",
       "type": "Passive_CD",
-      "explaintext": "현재 추가 치명타 피해의 15%만큼 증가",
+      "explaintext": "추가 치명타 피해가 현재 수치의 15%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "보양식",
       "type": "Passive_AD",
-      "explaintext": "현재 공격력의 15%만큼 증가",
+      "explaintext": "공격력이 현재 수치의 15%만큼 증가",
       "increaseValue": 0
     },    
     {
       "name": "빛보다 빠르게",
       "type": "Passive_AS",
-      "explaintext": "현재 공격 속도의 15%만큼 증가 (최대 공격 속도 : 12)",
+      "explaintext": "공격 속도가 현재 수치의 15%만큼 증가 (최대 공격 속도 : 12)",
       "increaseValue": 0
     },    
     {
       "name": "윤 탈 야생화살",
       "type": "Hit_CR",
-      "explaintext": "공격 적중 시마다 현재 치명타 확률 2% 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
+      "explaintext": "공격 적중 시마다 치명타 확률이 현재 수치의 1.5%만큼 증가 (초과된 치명타 확률의 100%은 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
       "name": "때린 곳 또 때리기",
       "type": "Hit_CD",
-      "explaintext": "공격 적중 시마다 현재 추가 치명타 피해 2% 증가",
+      "explaintext": "공격 적중 시마다 추가 치명타 피해가 현재 수치의 1.5%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "곡괭이 숙련",
       "type": "Hit_AD",
-      "explaintext": "공격 적중 시마다 현재 공격력 2% 증가",
+      "explaintext": "공격 적중 시마다 공격력이 현재 수치의 1.5%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "무념무상",
       "type": "Hit_AS",
-      "explaintext": "공격 적중 시마다 현재 공격 속도 2% 증가 (최대 공격 속도 : 12)",
+      "explaintext": "공격 적중 시마다 공격 속도가 현재 수치의 1.5%만큼 증가 (최대 공격 속도 : 12)",
       "increaseValue": 0
     },
     {
       "name": "에메랄드의 꿈",
       "type": "Max_Will",
-      "explaintext": "최대 의지 10% 증가",
+      "explaintext": "최대 의지가 현재 수치의 7%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "#오운완",
       "type": "Max_Stamina",
-      "explaintext": "최대 스태미나 15% 증가",
+      "explaintext": "최대 스태미나가 현재 수치의 15%만큼 증가",
       "increaseValue": 0
     }
   ]
