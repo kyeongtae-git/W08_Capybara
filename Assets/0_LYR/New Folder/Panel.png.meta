@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 34f37fe37b99f60418ac5f5062c53588
+guid: f2f73548bd752a048849500a5c76fe7f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7192357222849136107
-    second: Ground 1_0
+      213: 2296142564022239122
+    second: Panel 1_0
+  - first:
+      213: -7127352348837639221
+    second: Panel 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ground 1_0
+      name: Panel 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1000
-        height: 512
+        y: 464
+        width: 1914
+        height: 329
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51abc5a663d9f2c90800000000000000
-      internalID: -7192357222849136107
+      spriteID: 29f333a1f798ddf10800000000000000
+      internalID: 2296142564022239122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel 1_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 1892
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb8c721dce861d90800000000000000
+      internalID: -7127352348837639221
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ad5a8a0e260c4094f8a94b23800027dc
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ground 1_0: -7192357222849136107
+      Panel 1_0: 2296142564022239122
+      Panel 1_1: -7127352348837639221
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

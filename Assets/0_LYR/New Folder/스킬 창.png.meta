@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 34f37fe37b99f60418ac5f5062c53588
+guid: 521730832df333042a0ee856fa2628e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7192357222849136107
-    second: Ground 1_0
+      213: -1473218727655896121
+    second: "\uC2A4\uD0AC \uCC3D_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ground 1_0
+      name: "\uC2A4\uD0AC \uCC3D_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1000
-        height: 512
+        x: 26
+        y: 13
+        width: 282
+        height: 267
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51abc5a663d9f2c90800000000000000
-      internalID: -7192357222849136107
+      spriteID: 7cb0e956f531e8be0800000000000000
+      internalID: -1473218727655896121
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ad5a8a0e260c4094f8a94b23800027dc
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Ground 1_0: -7192357222849136107
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
