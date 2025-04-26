@@ -40,6 +40,8 @@ public class PlayerManager
 
     //치명타 확률 보정
     int _noCritStack = 0;
+    //치명타 초과분 전환 계수
+    float _overCritCoeff = 1f;
 
     //의지 감소 속도
     float _willDownSpeed = 8f;
@@ -76,23 +78,23 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.20f, _skillLevelArray[0], 0.60f, _skillLevelArray[4], 0.020f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.6000f, _skillLevelArray[4], 0.0150f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.24f, _skillLevelArray[1], 0.72f, _skillLevelArray[5], 0.024f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.225f, _skillLevelArray[1], 0.9000f, _skillLevelArray[5], 0.0225f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.48f, _skillLevelArray[6], 0.016f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.6000f, _skillLevelArray[6], 0.0150f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.12f, _skillLevelArray[3], 0.36f, _skillLevelArray[7], 0.012f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.6000f, _skillLevelArray[7], 0.0150f, _skillLevelArray[11]);
         _maxWillPoint
-            = CalcCurStatus(_baseWillPoint, 0.15f, _skillLevelArray[12], 0, 0, 0, 0);
+            = CalcCurStatus(_baseWillPoint, 0.1500f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = CalcCurStatus(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
+            = CalcCurStatus(_baseStaminaPoint, 0.1500f, _skillLevelArray[13], 0, 0, 0, 0);
 
-        //치명타 확률 100% 초과 시 초과 분의 2배만큼 치명타 피해로 전환
+        //치명타 확률 100% 초과 시 초과 분의 _overCritCoeff배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
         {
-            float oveCritRate = (_curCritRate - 100f);
-            _curCritDamage += (oveCritRate * 2f);
+            float oveCritRate = (_curCritRate - 100f) * _overCritCoeff;
+            _curCritDamage += oveCritRate;
         }
 
         //최대값 제한
@@ -110,7 +112,7 @@ public class PlayerManager
             (
             baseStatus 
             * (Mathf.Pow((1+ passiveCoeff), passiveLevel)) 
-            * (Mathf.Pow(((1 + conditionCoeff) * stamina), conditionLevel))
+            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel))
             ) 
             * (1 + (hitCoeff * hitLevel * _hitStack));
 
