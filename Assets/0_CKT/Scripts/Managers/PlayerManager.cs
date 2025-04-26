@@ -18,7 +18,7 @@ public class PlayerManager
     float _curATKDamage;
 
     //공격 속도
-    float _baseATKSpeed = 0.78f;
+    float _baseATKSpeed = 0.90f;
     float _curATKSpeed;
 
     //데미지 보너스
@@ -78,13 +78,13 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.6000f, _skillLevelArray[4], 0.0150f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.4500f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.225f, _skillLevelArray[1], 0.9000f, _skillLevelArray[5], 0.0225f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.4500f, _skillLevelArray[5], 0.0200f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.6000f, _skillLevelArray[6], 0.0150f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.4500f, _skillLevelArray[6], 0.0200f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.6000f, _skillLevelArray[7], 0.0150f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.4500f, _skillLevelArray[7], 0.0200f, _skillLevelArray[11]);
         _maxWillPoint
             = CalcCurStatus(_baseWillPoint, 0.1500f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
