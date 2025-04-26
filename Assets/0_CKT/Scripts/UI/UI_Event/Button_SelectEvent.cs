@@ -9,7 +9,7 @@ public class Button_SelectEvent : MonoBehaviour
     {
         _selectEventButton = GetComponent<Button>();
         _selectEventButton.onClick.AddListener(() => Managers.UIManager.OnUI_EventCanvasEnableEvent?.Invoke(false));
-        _selectEventButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true));
+        _selectEventButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true, false));
     }
 
     void SetEvent()

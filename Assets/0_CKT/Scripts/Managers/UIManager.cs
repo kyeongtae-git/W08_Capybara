@@ -6,7 +6,7 @@ public class UIManager
 {
     public Action<bool> OnUI_EventCanvasEnableEvent;
 
-    public Action<bool> OnUI_SkillSelectionCanvasEnableEvent;
+    public Action<bool, bool> OnUI_SkillSelectionCanvasEnableEvent;
     public Action<int> OnButton_SelectSkillSetEvent;
 
     public Action<int> OnUpdateStageUIEvent;
