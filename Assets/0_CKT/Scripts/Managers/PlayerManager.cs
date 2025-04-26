@@ -40,8 +40,8 @@ public class PlayerManager
 
     //치명타 확률 보정
     int _noCritStack = 0;
-    //치명타 초과분 전환 계수
-    float _overCritCoeff = 1f;
+    //치명타 초과분 전환 비율
+    float _overCritCoeff = 2f;
 
     //의지 감소 속도
     float _willDownSpeed = 8f;
