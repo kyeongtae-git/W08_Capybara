@@ -46,7 +46,7 @@ public class PlayerManager
     //의지 감소 속도
     float _willDownSpeed = 8f;
     //스태미나 감소 속도
-    float _staminaDownSpeed = 5f;
+    float _staminaDownSpeed = 8f;
 
     //효과별 계수
     //float _passiveCoeff = 0.15f;
@@ -78,13 +78,13 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.4500f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.3000f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.4500f, _skillLevelArray[5], 0.0200f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0200f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.4500f, _skillLevelArray[6], 0.0200f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.0200f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.4500f, _skillLevelArray[7], 0.0200f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0200f, _skillLevelArray[11]);
         _maxWillPoint
             = CalcCurStatus(_baseWillPoint, 0.1500f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
