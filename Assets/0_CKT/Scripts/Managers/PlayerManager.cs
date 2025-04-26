@@ -78,7 +78,7 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.3000f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.2250f, _skillLevelArray[0], 0.4500f, _skillLevelArray[4], 0.0200f, _skillLevelArray[8]);
         _curCritDamage  
             = CalcCurStatus(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0200f, _skillLevelArray[9]);
         _curATKDamage   
@@ -86,7 +86,7 @@ public class PlayerManager
         _curATKSpeed    
             = CalcCurStatus(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0200f, _skillLevelArray[11]);
         _maxWillPoint
-            = CalcCurStatus(_baseWillPoint, 0.1500f, _skillLevelArray[12], 0, 0, 0, 0);
+            = CalcCurStatus(_baseWillPoint, 0.1000f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
             = CalcCurStatus(_baseStaminaPoint, 0.1500f, _skillLevelArray[13], 0, 0, 0, 0);
 
@@ -99,7 +99,7 @@ public class PlayerManager
 
         //최대값 제한
         //_curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
-        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 15f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 12f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
