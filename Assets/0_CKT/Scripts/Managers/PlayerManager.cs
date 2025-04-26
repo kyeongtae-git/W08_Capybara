@@ -78,14 +78,16 @@ public class PlayerManager
     {
         //Ω∫≈» ∞ËªÍ
         _curCritRate    
-            = SumCalc(_baseCritRate, 0.1500f, _skillLevelArray[0], 0.3000f, _skillLevelArray[4], 0.0117f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 1.17f, _skillLevelArray[8]);
         
         _curCritDamage  
             = MultiplyCalc(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0117f, _skillLevelArray[9]);
         _curATKDamage   
             = MultiplyCalc(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.0117f, _skillLevelArray[10]);
+        
         _curATKSpeed    
-            = MultiplyCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0117f, _skillLevelArray[11]);
+            = SumCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0117f, _skillLevelArray[11]);
+        
         _maxWillPoint
             = MultiplyCalc(_baseWillPoint, 0.1000f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
@@ -111,9 +113,9 @@ public class PlayerManager
 
         float result =
             baseStatus
-            + ((passiveCoeff * 100f) * passiveLevel)
-            + ((conditionCoeff * 100f) * conditionLevel)
-            + ((hitCoeff * 100) * hitLevel);
+            + (passiveCoeff * passiveLevel)
+            + ((conditionCoeff * stamina) * conditionLevel)
+            + (hitCoeff * hitLevel * _hitStack);
 
         return result;
     }
@@ -125,7 +127,7 @@ public class PlayerManager
         
         float result =
             baseStatus 
-            * (Mathf.Pow((1+ passiveCoeff), passiveLevel)) 
+            * (Mathf.Pow((1 + passiveCoeff), passiveLevel)) 
             * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel)) 
             * (1 + (hitCoeff * hitLevel * _hitStack));
 
