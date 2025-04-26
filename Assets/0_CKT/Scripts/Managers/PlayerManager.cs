@@ -78,15 +78,15 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 1.17f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 1.5f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.150f, _skillLevelArray[1], 0.3000f, _skillLevelArray[5], 0.0117f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.30f, _skillLevelArray[1], 0.6000f, _skillLevelArray[5], 3f, _skillLevelArray[9]);
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.0117f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.150f, _skillLevelArray[2], 0.3000f, _skillLevelArray[6], 0.15f, _skillLevelArray[10]);
         
         _curATKSpeed    
-            = SumCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.0117f, _skillLevelArray[11]);
+            = MultiplyCalc(_baseATKSpeed, 0.1500f, _skillLevelArray[3], 0.3000f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
         _maxWillPoint
             = MultiplyCalc(_baseWillPoint, 0.1000f, _skillLevelArray[12], 0, 0, 0, 0);
@@ -102,7 +102,7 @@ public class PlayerManager
 
         //최대값 제한
         //_curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
-        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 12f);
+        _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 30f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
@@ -126,10 +126,13 @@ public class PlayerManager
         int stamina = (_staminaPoint > 0) ? 1 : 0;
         
         float result =
+            (
             baseStatus 
             * (Mathf.Pow((1 + passiveCoeff), passiveLevel)) 
-            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel)) 
-            * (1 + (hitCoeff * hitLevel * _hitStack));
+            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel))
+            )
+            + (hitCoeff * hitLevel * _hitStack);
+        //* (1 + (hitCoeff * hitLevel * _hitStack));
 
         return result;
     }
