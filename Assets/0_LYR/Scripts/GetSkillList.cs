@@ -42,7 +42,7 @@ public class GetSkillList : MonoBehaviour
                 foreach (Skill skill in skillData.skills)
                 {
                     // explaintext에서 increaseValue 추출
-                    skill.increaseValue = ParseIncreaseValue(skill.explaintext, skill.increaseValue);
+                    //skill.increaseValue = ParseIncreaseValue(skill.explaintext, skill.increaseValue);
                     skillDataMap[skill.type] = skill;
                 }
                 Debug.Log("스킬 데이터 로드 완료!");
