@@ -13,10 +13,6 @@ public class Button_SelectSkill : MonoBehaviour
 
     void Start()
     {
-        _selectSkillButton = GetComponent<Button>();
-        _skillList = FindAnyObjectByType<GetSkillList>();
-        _aqSkill = FindAnyObjectByType<AcquiredSkills>();
-        _skillImage = FindAnyObjectByType<GetSkillImage>();
         //SetSkill(Random.Range(0, System.Enum.GetValues(typeof(SkillType)).Length));
 
         //Managers.UIManager.OnButton_SelectSkillSetEvent += SetSkill;
@@ -32,6 +28,12 @@ public class Button_SelectSkill : MonoBehaviour
         string skillTypestring =skillType.ToString();
         Skill skill;
 
+        _selectSkillButton = GetComponent<Button>();
+        _skillList = FindAnyObjectByType<GetSkillList>();
+        _aqSkill = FindAnyObjectByType<AcquiredSkills>();
+        _skillImage = FindAnyObjectByType<GetSkillImage>();
+
+        Debug.Log(_skillList.name);
         if(_skillList.TryGetSkill(skillTypestring, out skill))
         {
             skillname.text = skill.name;
