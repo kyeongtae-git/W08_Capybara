@@ -6,7 +6,7 @@ public class PlayerManager
     int[] _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
 
     //치확
-    float _baseCritRate = 33f;
+    float _baseCritRate = 10f;
     float _curCritRate;
 
     //치피
@@ -21,6 +21,10 @@ public class PlayerManager
     float _baseATKSpeed = 0.78f;
     float _curATKSpeed;
 
+    //데미지 보너스
+    //float _baseDamageBonus = 0;
+    //float _curDamageBonus;
+
     //의지
     float _baseWillPoint = 100f;
     float _willPoint;
@@ -34,19 +38,23 @@ public class PlayerManager
     //적중 횟수
     int _hitStack = 0;
 
+    //치명타 확률 보정
+    int _noCritStack = 0;
+
     //의지 감소 속도
     float _willDownSpeed = 8f;
     //스태미나 감소 속도
     float _staminaDownSpeed = 5f;
 
     //효과별 계수
-    float _passiveCoeff = 0.15f;
-    float _conditionCoeff = 0.4f;
-    float _hitCoeff = 0.04f;
+    //float _passiveCoeff = 0.15f;
+    //float _conditionCoeff = 0.4f;
+    //float _hitCoeff = 0.04f;
 
     public void Init()
     {
         _hitStack = 0;
+        _noCritStack = 0;
 
         PlayerStatus();
         _willPoint = _maxWillPoint;
@@ -68,20 +76,27 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = CalcCurStatus(_baseCritRate, 0.16f, _skillLevelArray[0], 0.7f, _skillLevelArray[4], 0.8f, _skillLevelArray[8]);
+            = CalcCurStatus(_baseCritRate, 0.20f, _skillLevelArray[0], 0.60f, _skillLevelArray[4], 0.020f, _skillLevelArray[8]);
         _curCritDamage  
-            = CalcCurStatus(_baseCritDamage, 0.16f, _skillLevelArray[1], 0.7f, _skillLevelArray[5], 0.16f, _skillLevelArray[9]);
+            = CalcCurStatus(_baseCritDamage, 0.24f, _skillLevelArray[1], 0.72f, _skillLevelArray[5], 0.024f, _skillLevelArray[9]);
         _curATKDamage   
-            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.7f, _skillLevelArray[6], 0.12f, _skillLevelArray[10]);
+            = CalcCurStatus(_baseATKDamage, 0.16f, _skillLevelArray[2], 0.48f, _skillLevelArray[6], 0.016f, _skillLevelArray[10]);
         _curATKSpeed    
-            = CalcCurStatus(_baseATKSpeed, 0.16f, _skillLevelArray[3], 0.7f, _skillLevelArray[7], 0.04f, _skillLevelArray[11]);
+            = CalcCurStatus(_baseATKSpeed, 0.12f, _skillLevelArray[3], 0.36f, _skillLevelArray[7], 0.012f, _skillLevelArray[11]);
         _maxWillPoint
-            = CalcCurStatus(_baseWillPoint, 0.16f, _skillLevelArray[12], 0, 0, 0, 0);
+            = CalcCurStatus(_baseWillPoint, 0.15f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = CalcCurStatus(_baseStaminaPoint, 0.16f, _skillLevelArray[13], 0, 0, 0, 0);
+            = CalcCurStatus(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
+
+        //치명타 확률 100% 초과 시 초과 분의 2배만큼 치명타 피해로 전환
+        if (_curCritRate > 100f)
+        {
+            float oveCritRate = (_curCritRate - 100f);
+            _curCritDamage += (oveCritRate * 2f);
+        }
 
         //최대값 제한
-        _curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
+        //_curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
         _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 15f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
@@ -94,10 +109,10 @@ public class PlayerManager
         float result =
             (
             baseStatus 
-            * (1 + (passiveCoeff * passiveLevel)) 
-            * (1 + (conditionCoeff * conditionLevel * stamina))
+            * (Mathf.Pow((1+ passiveCoeff), passiveLevel)) 
+            * (Mathf.Pow(((1 + conditionCoeff) * stamina), conditionLevel))
             ) 
-            + (hitCoeff * hitLevel * _hitStack);
+            * (1 + (hitCoeff * hitLevel * _hitStack));
 
         return result;
     }
@@ -131,10 +146,17 @@ public class PlayerManager
         Managers.UIManager.OnCritUIEvent?.Invoke(false);
 
         //치명타 데미지
-        if (Managers.Utils.RandomSuccess(_curCritRate * 0.01f))
+        float finalCrit = _curCritRate * 0.01f * (_noCritStack + 1);
+        if (Managers.Utils.RandomSuccess(finalCrit))
         {
+            _noCritStack = 0;
             damage *= (1 + (_curCritDamage * 0.01f));
             Managers.UIManager.OnCritUIEvent?.Invoke(true);
+        }
+        else
+        {
+            //확률 보정
+            _noCritStack++;
         }
 
         //---데미지 계산 후 나머지---

@@ -33,7 +33,7 @@ public class Button_SelectSkill : MonoBehaviour
         _aqSkill = FindAnyObjectByType<AcquiredSkills>();
         _skillImage = FindAnyObjectByType<GetSkillImage>();
 
-        Debug.Log(_skillList.name);
+        //Debug.Log(_skillList.name);
         if(_skillList.TryGetSkill(skillTypestring, out skill))
         {
             skillname.text = skill.name;
@@ -46,7 +46,7 @@ public class Button_SelectSkill : MonoBehaviour
         }
 
         _selectSkillButton.onClick.RemoveAllListeners();
-        _selectSkillButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(false));
+        _selectSkillButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(false, false));
         _selectSkillButton.onClick.AddListener(() => Managers.PlayerManager.LevelUpSkill(skillID));
         _selectSkillButton.onClick.AddListener(() => _aqSkill.AssignSkill(skill.type));
         _selectSkillButton.onClick.AddListener(() => StartCoroutine(Managers.GameManager.StartStage()));

@@ -7,6 +7,7 @@ public class GameManager
     public GameState CurGameState => _curGameState;
     GameState _curGameState;
 
+    public int MaxStage => _maxStage;
     int _maxStage = 54;
 
     public int Stage => _stage;
@@ -47,8 +48,11 @@ public class GameManager
         //이벤트 발생 안 했을 때
         else*/
         {
-            //스킬 선택 UI 활성화
-            Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true);
+            //게임 클리어 여부
+            bool gameClear = (_stage > _maxStage) ? true : false;
+            
+            //스킬 선택 UI 활성화 (게임 클리어라면 바로 스테이지 시작)
+            Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true, gameClear);
             //Managers.UIManager.OnButton_SelectSkillSetEvent?.Invoke();
         }
     }
