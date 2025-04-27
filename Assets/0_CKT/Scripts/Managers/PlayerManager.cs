@@ -18,7 +18,7 @@ public class PlayerManager
     float _curATKDamage;
 
     //공격 속도
-    float _baseATKSpeed = 0.78f;
+    float _baseATKSpeed = 1.00f;
     float _curATKSpeed;
 
     //데미지 보너스
@@ -46,7 +46,7 @@ public class PlayerManager
     //의지 감소 속도
     float _willDownSpeed = 8f;
     //스태미나 감소 속도
-    float _staminaDownSpeed = 8f;
+    float _staminaDownSpeed = 10f;
 
     //효과별 계수
     //float _passiveCoeff = 0.15f;
@@ -77,11 +77,17 @@ public class PlayerManager
     void PlayerStatus()
     {
         //스탯 계산
+        //치명타 확률 오버되어도 합연산이기 때문에 상관없음
         _curCritRate    
-            = SumCalc(100, _baseCritRate, 0.12f, _skillLevelArray[0], 0.24f, _skillLevelArray[4], 0.012f, _skillLevelArray[8]);
+            = SumCalc(100, _baseCritRate, 0.15f, _skillLevelArray[0], 0.30f, _skillLevelArray[4], 0.015f, _skillLevelArray[8]);
         
-        _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
+        //이전 기준의 1.15배이기 때문에 그냥 15% 쌔지게 하면 됨 (적중 시 효과는 적중 횟수는 합연산, 스킬 레벨은 곱연산)
+        //치명타 터졌을 때 200%에서 15% 쌔지면 215%가 아니라 230%
+        float totalCritDamage 
+            = MultiplyCalc((_baseCritDamage + 100f), 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
+        _curCritDamage
+            = totalCritDamage - 100f;
+
         _curATKDamage   
             = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.015f, _skillLevelArray[10]);
         
@@ -129,7 +135,7 @@ public class PlayerManager
 
         float passiveResult = Mathf.Pow((1 + passiveCoeff), passiveLevel);
         float conditionResult = Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel);
-        float hitResult = (1 + (hitCoeff * hitLevel * _hitStack));
+        float hitResult = Mathf.Pow((1 + (hitCoeff * _hitStack)), hitLevel);//(1 + (hitCoeff * hitLevel * _hitStack));
 
         float result =
             baseStatus * passiveResult * conditionResult * hitResult;
