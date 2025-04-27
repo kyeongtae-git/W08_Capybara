@@ -3,7 +3,7 @@
     {
       "name": "컨디션 만땅",
       "type": "Condition_CR",
-      "explaintext": "스태미나가 0 초과일 때 치명타 확률이 30% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
+      "explaintext": "스태미나가 0 초과일 때 치명타 확률이 24% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
@@ -21,13 +21,13 @@
     {
       "name": "초반 스퍼트",
       "type": "Condition_AS",
-      "explaintext": "스태미나가 0 초과일 때 공격 속도가 현재 수치의 30%만큼 증가 (최대 공격 속도 : 30)",
+      "explaintext": "스태미나가 0 초과일 때 공격 속도가 0.3 증가 (최대 공격 속도 : 30)",
       "increaseValue": 0
     },
     {
       "name": "빈틈 발견",
       "type": "Passive_CR",
-      "explaintext": "치명타 확률이 15% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
+      "explaintext": "치명타 확률이 12% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
@@ -45,31 +45,31 @@
     {
       "name": "빛보다 빠르게",
       "type": "Passive_AS",
-      "explaintext": "공격 속도가 현재 수치의 15%만큼 증가 (최대 공격 속도 : 30)",
+      "explaintext": "공격 속도가 0.15만큼 증가 (최대 공격 속도 : 30)",
       "increaseValue": 0
     },    
     {
       "name": "광질이 제일 쉬웠어요",
       "type": "Hit_CR",
-      "explaintext": "공격 적중 시마다 치명타 확률이 3% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
+      "explaintext": "공격 적중 시마다 치명타 확률이 1.2% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
       "name": "때린 곳 또 때리기",
       "type": "Hit_CD",
-      "explaintext": "공격 적중 시마다 추가 치명타 피해가 6% 증가",
+      "explaintext": "공격 적중 시마다 추가 치명타 피해가 현제 수치의 1.5%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "곡괭이 숙련",
       "type": "Hit_AD",
-      "explaintext": "공격 적중 시마다 공격력이 0.3 증가",
+      "explaintext": "공격 적중 시마다 공격력이 현재 수치의 1.5%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "무념무상",
       "type": "Hit_AS",
-      "explaintext": "공격 적중 시마다 공격 속도가 0.03 증가 (최대 공격 속도 : 30)",
+      "explaintext": "공격 적중 시마다 공격 속도가 0.015 증가 (최대 공격 속도 : 30)",
       "increaseValue": 0
     },
     {

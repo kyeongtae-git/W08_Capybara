@@ -78,15 +78,16 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 3f, _skillLevelArray[8]);
+            = SumCalc(100, _baseCritRate, 0.12f, _skillLevelArray[0], 0.24f, _skillLevelArray[4], 0.012f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 6f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.3f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.015f, _skillLevelArray[10]);
         
+        //곱연산하면 고점이 매우 높음, 합연산으로 고점 제한 + 수치는 15% 유지
         _curATKSpeed    
-            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.03f, _skillLevelArray[11]);
+            = SumCalc(1, _baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
         _maxWillPoint
             = MultiplyCalc(_baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
@@ -107,15 +108,16 @@ public class PlayerManager
     }
 
     //합연산
-    float SumCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
+    float SumCalc(int digit, float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
 
+        float passiveResult = (passiveCoeff * passiveLevel);
+        float conditionResult = ((conditionCoeff * stamina) * conditionLevel);
+        float hitResult = (hitCoeff * hitLevel * _hitStack);
+
         float result =
-            baseStatus
-            + (passiveCoeff * passiveLevel)
-            + ((conditionCoeff * stamina) * conditionLevel)
-            + (hitCoeff * hitLevel * _hitStack);
+            baseStatus + (digit * (passiveResult + conditionResult + hitResult));
 
         return result;
     }
@@ -124,15 +126,13 @@ public class PlayerManager
     float MultiplyCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
-        
+
+        float passiveResult = Mathf.Pow((1 + passiveCoeff), passiveLevel);
+        float conditionResult = Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel);
+        float hitResult = (1 + (hitCoeff * hitLevel * _hitStack));
+
         float result =
-            (
-            baseStatus 
-            * (Mathf.Pow((1 + passiveCoeff), passiveLevel)) 
-            * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel))
-            )
-            + (hitCoeff * hitLevel * _hitStack);
-        //* (1 + (hitCoeff * hitLevel * _hitStack));
+            baseStatus * passiveResult * conditionResult * hitResult;
 
         return result;
     }
