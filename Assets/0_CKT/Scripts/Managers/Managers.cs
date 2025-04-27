@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
@@ -52,5 +52,6 @@ public class Managers : MonoBehaviour
         RockManager.Init();
         EventManager.Init();
         SkillManager.Init();
+        Time.timeScale = 4.0f;
     }
 }
