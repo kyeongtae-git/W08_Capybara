@@ -78,15 +78,15 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = SumCalc(_baseCritRate, 7.8f, _skillLevelArray[0], 13f, _skillLevelArray[4], 0.49f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 7.8f, _skillLevelArray[0], 15f, _skillLevelArray[4], 0.49f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.18f, _skillLevelArray[1], 0.3f, _skillLevelArray[5], 0.0108f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.18f, _skillLevelArray[1], 0.35f, _skillLevelArray[5], 0.0108f, _skillLevelArray[9]);
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.25f, _skillLevelArray[6], 0.009f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.29f, _skillLevelArray[6], 0.009f, _skillLevelArray[10]);
         
         _curATKSpeed    
-            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.25f, _skillLevelArray[7], 0.009f, _skillLevelArray[11]);
+            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.29f, _skillLevelArray[7], 0.009f, _skillLevelArray[11]);
         
         _maxWillPoint
             = MultiplyCalc(_baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
