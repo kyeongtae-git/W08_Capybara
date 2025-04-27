@@ -90,9 +90,9 @@ public class PlayerManager
             = SumCalc(1, _baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
         _maxWillPoint
-            = MultiplyCalc(_baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
+            = SumCalc(100, _baseWillPoint, 0.15f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = MultiplyCalc(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
+            = SumCalc(100, _baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //치명타 확률 100% 초과 시 초과 분의 _overCritCoeff배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
