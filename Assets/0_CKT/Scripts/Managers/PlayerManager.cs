@@ -1,54 +1,54 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerManager
 {
-    //½ºÅ³ Á¾·ù
+    //ìŠ¤í‚¬ ì¢…ë¥˜
     int[] _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
 
-    //Ä¡È®
+    //ì¹˜í™•
     float _baseCritRate = 10f;
     float _curCritRate;
 
-    //Ä¡ÇÇ
+    //ì¹˜í”¼
     float _baseCritDamage = 100f;
     float _curCritDamage;
 
-    //°ø°İ·Â
+    //ê³µê²©ë ¥
     float _baseATKDamage = 10f;
     float _curATKDamage;
 
-    //°ø°İ ¼Óµµ
+    //ê³µê²© ì†ë„
     float _baseATKSpeed = 1.00f;
     float _curATKSpeed;
 
-    //µ¥¹ÌÁö º¸³Ê½º
+    //ë°ë¯¸ì§€ ë³´ë„ˆìŠ¤
     //float _baseDamageBonus = 0;
     //float _curDamageBonus;
 
-    //ÀÇÁö
+    //ì˜ì§€
     float _baseWillPoint = 100f;
     float _willPoint;
     float _maxWillPoint;
 
-    //½ºÅÂ¹Ì³ª
+    //ìŠ¤íƒœë¯¸ë‚˜
     float _baseStaminaPoint = 100f;
     float _staminaPoint;
     float _maxStaminaPoint;
 
-    //ÀûÁß È½¼ö
+    //ì ì¤‘ íšŸìˆ˜
     int _hitStack = 0;
 
-    //Ä¡¸íÅ¸ È®·ü º¸Á¤
+    //ì¹˜ëª…íƒ€ í™•ë¥  ë³´ì •
     int _noCritStack = 0;
-    //Ä¡¸íÅ¸ ÃÊ°úºĞ ÀüÈ¯ ºñÀ²
+    //ì¹˜ëª…íƒ€ ì´ˆê³¼ë¶„ ì „í™˜ ë¹„ìœ¨
     float _overCritCoeff = 2f;
 
-    //ÀÇÁö °¨¼Ò ¼Óµµ
+    //ì˜ì§€ ê°ì†Œ ì†ë„
     float _willDownSpeed = 8f;
-    //½ºÅÂ¹Ì³ª °¨¼Ò ¼Óµµ
-    float _staminaDownSpeed = 10f;
+    //ìŠ¤íƒœë¯¸ë‚˜ ê°ì†Œ ì†ë„
+    float _staminaDownSpeed = 6f;
 
-    //È¿°úº° °è¼ö
+    //íš¨ê³¼ë³„ ê³„ìˆ˜
     //float _passiveCoeff = 0.15f;
     //float _conditionCoeff = 0.4f;
     //float _hitCoeff = 0.04f;
@@ -64,7 +64,7 @@ public class PlayerManager
         UpdateUI();
     }
 
-    //index¹øÂ° ½ºÅ³ ·¹º§¾÷
+    //indexë²ˆì§¸ ìŠ¤í‚¬ ë ˆë²¨ì—…
     public void LevelUpSkill(int index)
     {
         _skillLevelArray[index]++;
@@ -73,16 +73,16 @@ public class PlayerManager
         UpdateUI();
     }
 
-    //ÇöÀç (Ä¡È®, Ä¡ÇÇ, °ø°İ·Â, °ø°İ¼Óµµ, ÃÖ´ë ÀÇÁö, ÃÖ´ë ½ºÅÂ¹Ì³ª) °è»ê
+    //í˜„ì¬ (ì¹˜í™•, ì¹˜í”¼, ê³µê²©ë ¥, ê³µê²©ì†ë„, ìµœëŒ€ ì˜ì§€, ìµœëŒ€ ìŠ¤íƒœë¯¸ë‚˜) ê³„ì‚°
     void PlayerStatus()
     {
-        //½ºÅÈ °è»ê
-        //Ä¡¸íÅ¸ È®·ü ¿À¹öµÇ¾îµµ ÇÕ¿¬»êÀÌ±â ¶§¹®¿¡ »ó°ü¾øÀ½
+        //ìŠ¤íƒ¯ ê³„ì‚°
+        //ì¹˜ëª…íƒ€ í™•ë¥  ì˜¤ë²„ë˜ì–´ë„ í•©ì—°ì‚°ì´ê¸° ë•Œë¬¸ì— ìƒê´€ì—†ìŒ
         _curCritRate    
             = SumCalc(100, _baseCritRate, 0.15f, _skillLevelArray[0], 0.30f, _skillLevelArray[4], 0.015f, _skillLevelArray[8]);
         
-        //ÀÌÀü ±âÁØÀÇ 1.15¹èÀÌ±â ¶§¹®¿¡ ±×³É 15% ½ØÁö°Ô ÇÏ¸é µÊ (ÀûÁß ½Ã È¿°ú´Â ÀûÁß È½¼ö´Â ÇÕ¿¬»ê, ½ºÅ³ ·¹º§Àº °ö¿¬»ê)
-        //Ä¡¸íÅ¸ ÅÍÁ³À» ¶§ 200%¿¡¼­ 15% ½ØÁö¸é 215%°¡ ¾Æ´Ï¶ó 230%
+        //ì´ì „ ê¸°ì¤€ì˜ 1.15ë°°ì´ê¸° ë•Œë¬¸ì— ê·¸ëƒ¥ 15% ìŒ”ì§€ê²Œ í•˜ë©´ ë¨ (ì ì¤‘ ì‹œ íš¨ê³¼ëŠ” ì ì¤‘ íšŸìˆ˜ëŠ” í•©ì—°ì‚°, ìŠ¤í‚¬ ë ˆë²¨ì€ ê³±ì—°ì‚°)
+        //ì¹˜ëª…íƒ€ í„°ì¡Œì„ ë•Œ 200%ì—ì„œ 15% ìŒ”ì§€ë©´ 215%ê°€ ì•„ë‹ˆë¼ 230%
         float totalCritDamage 
             = MultiplyCalc((_baseCritDamage + 100f), 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
         _curCritDamage
@@ -91,7 +91,7 @@ public class PlayerManager
         _curATKDamage   
             = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.015f, _skillLevelArray[10]);
         
-        //°ö¿¬»êÇÏ¸é °íÁ¡ÀÌ ¸Å¿ì ³ôÀ½, ÇÕ¿¬»êÀ¸·Î °íÁ¡ Á¦ÇÑ + ¼öÄ¡´Â 15% À¯Áö
+        //ê³±ì—°ì‚°í•˜ë©´ ê³ ì ì´ ë§¤ìš° ë†’ìŒ, í•©ì—°ì‚°ìœ¼ë¡œ ê³ ì  ì œí•œ + ìˆ˜ì¹˜ëŠ” 15% ìœ ì§€
         _curATKSpeed    
             = SumCalc(1, _baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
@@ -100,20 +100,20 @@ public class PlayerManager
         _maxStaminaPoint
             = SumCalc(100, _baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
-        //Ä¡¸íÅ¸ È®·ü 100% ÃÊ°ú ½Ã ÃÊ°ú ºĞÀÇ _overCritCoeff¹è¸¸Å­ Ä¡¸íÅ¸ ÇÇÇØ·Î ÀüÈ¯
+        //ì¹˜ëª…íƒ€ í™•ë¥  100% ì´ˆê³¼ ì‹œ ì´ˆê³¼ ë¶„ì˜ _overCritCoeffë°°ë§Œí¼ ì¹˜ëª…íƒ€ í”¼í•´ë¡œ ì „í™˜
         if (_curCritRate > 100f)
         {
             float oveCritRate = (_curCritRate - 100f) * _overCritCoeff;
             _curCritDamage += oveCritRate;
         }
 
-        //ÃÖ´ë°ª Á¦ÇÑ
+        //ìµœëŒ€ê°’ ì œí•œ
         //_curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
         _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 30f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
-    //ÇÕ¿¬»ê
+    //í•©ì—°ì‚°
     float SumCalc(int digit, float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
@@ -128,14 +128,14 @@ public class PlayerManager
         return result;
     }
 
-    //°ö¿¬»ê
+    //ê³±ì—°ì‚°
     float MultiplyCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
 
         float passiveResult = Mathf.Pow((1 + passiveCoeff), passiveLevel);
         float conditionResult = Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel);
-        float hitResult = Mathf.Pow((1 + (hitCoeff * _hitStack)), hitLevel);//(1 + (hitCoeff * hitLevel * _hitStack));
+        float hitResult = (1 + (hitCoeff * hitLevel * _hitStack));//Mathf.Pow((1 + (hitCoeff * _hitStack)), hitLevel);//
 
         float result =
             baseStatus * passiveResult * conditionResult * hitResult;
@@ -143,7 +143,7 @@ public class PlayerManager
         return result;
     }
 
-    //ÀÇÁö °¨¼Ò
+    //ì˜ì§€ ê°ì†Œ
     public void DecreaseWill()
     {
         _willPoint -= _willDownSpeed * Time.deltaTime;
@@ -151,33 +151,33 @@ public class PlayerManager
         Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint, _maxWillPoint);
     }
 
-    //ÀÇÁö°¡ 0ÀÎÁö È®ÀÎ
+    //ì˜ì§€ê°€ 0ì¸ì§€ í™•ì¸
     public bool RunOutOfWill()
     {
         return (_willPoint <= 0);
     }
 
-    //°ø°İ ½Ã°£ °è»ê
+    //ê³µê²© ì‹œê°„ ê³„ì‚°
     public float GetAttackTime()
     {
         float atkTime = (1 / _curATKSpeed);
         return atkTime;
     }
 
-    //ÃÖÁ¾ ÇÇÇØ·® °è»ê
+    //ìµœì¢… í”¼í•´ëŸ‰ ê³„ì‚°
     public float GetFinalDamage()
     {
-        //±âº» µ¥¹ÌÁö
+        //ê¸°ë³¸ ë°ë¯¸ì§€
         float damage = _curATKDamage;
         Managers.UIManager.OnCritUIEvent?.Invoke(false);
 
-        //Ä¡È® º¸Á¤ ½ºÅÃ °è»ê (Ä¡¸íÅ¸ È®·üÀÌ µü 100ÆÛÀÏ ¶§ ¶§¹®¿¡ ³»¸²x, ¿Ã¸²ÈÄ -1)
+        //ì¹˜í™• ë³´ì • ìŠ¤íƒ ê³„ì‚° (ì¹˜ëª…íƒ€ í™•ë¥ ì´ ë”± 100í¼ì¼ ë•Œ ë•Œë¬¸ì— ë‚´ë¦¼x, ì˜¬ë¦¼í›„ -1)
         int maxNoCritStack = Mathf.CeilToInt(100 / _curCritRate) - 1;
 
-        //Ä¡¸íÅ¸ ¹ß»ı ¿©ºÎ
+        //ì¹˜ëª…íƒ€ ë°œìƒ ì—¬ë¶€
         bool isCrit = false;
 
-        //ÃµÀå ¾È ÃÆÀ¸¸é Á¤»óÀûÀ¸·Î Ä¡¸íÅ¸ È®·ü °è»ê
+        //ì²œì¥ ì•ˆ ì³¤ìœ¼ë©´ ì •ìƒì ìœ¼ë¡œ ì¹˜ëª…íƒ€ í™•ë¥  ê³„ì‚°
         if (_noCritStack < maxNoCritStack)
         {
             if (Managers.Utils.RandomSuccess(_curCritRate * 0.01f))
@@ -186,17 +186,17 @@ public class PlayerManager
             }
             else
             {
-                //ÃµÀå ½ºÅÃ Áõ°¡
+                //ì²œì¥ ìŠ¤íƒ ì¦ê°€
                 _noCritStack++;
             }
         }
-        //ÃµÀå ÃÆÀ¸¸é Ä¡¸íÅ¸ È®Á¤
+        //ì²œì¥ ì³¤ìœ¼ë©´ ì¹˜ëª…íƒ€ í™•ì •
         else
         {
             isCrit = true;
         }
 
-        //Ä¡¸íÅ¸ µ¥¹ÌÁö
+        //ì¹˜ëª…íƒ€ ë°ë¯¸ì§€
         if (isCrit)
         {
             _noCritStack = 0;
@@ -204,12 +204,12 @@ public class PlayerManager
             Managers.UIManager.OnCritUIEvent?.Invoke(true);
         }
 
-        //---µ¥¹ÌÁö °è»ê ÈÄ ³ª¸ÓÁö---
+        //---ë°ë¯¸ì§€ ê³„ì‚° í›„ ë‚˜ë¨¸ì§€---
 
-        //ÀûÁß ½ºÅÃ Áõ°¡
+        //ì ì¤‘ ìŠ¤íƒ ì¦ê°€
         _hitStack++;
 
-        //½ºÅÂ¹Ì³ª ¼Ò¸ğ
+        //ìŠ¤íƒœë¯¸ë‚˜ ì†Œëª¨
         _staminaPoint -= _staminaDownSpeed;
         _staminaPoint = Mathf.Clamp(_staminaPoint, 0, _maxStaminaPoint);
 
@@ -221,7 +221,7 @@ public class PlayerManager
 
     void UpdateUI()
     {
-        //UI °»½Å
+        //UI ê°±ì‹ 
         Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
         Managers.UIManager.OnUpdateCritDamageUIEvent?.Invoke(_curCritDamage);
         Managers.UIManager.OnUpdateATKDamageUIEvent?.Invoke(_curATKDamage);

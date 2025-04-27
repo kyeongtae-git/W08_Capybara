@@ -24,7 +24,7 @@ public class GameManager
     public void GameOver()
     {
         _curGameState = GameState.Idle;
-        Debug.Log("의지가 바닥났습니다.");
+        Debug.Log($"의지가 바닥났습니다. 마지막 스테이지 : {_stage}");
         SceneManager.LoadScene("GameOver");
     }
 
