@@ -165,24 +165,46 @@ public class PlayerManager
         float damage = _curATKDamage;
         Managers.UIManager.OnCritUIEvent?.Invoke(false);
 
+        //치확 보정 스택 계산
+        int maxNoCritStack = Mathf.CeilToInt(100 / _curCritRate);
+
+        //치명타 발생 여부
+        bool isCrit = false;
+
+        //천장 안 쳤으면 정상적으로 치명타 확률 계산
+        if (_noCritStack < maxNoCritStack)
+        {
+            
+            if (Managers.Utils.RandomSuccess(_curCritRate * 0.01f))
+            {
+                isCrit = true;
+            }
+            else
+            {
+                //천장 스택 증가
+                _noCritStack++;
+            }
+        }
+        //천장 쳤으면 치명타 확정
+        else
+        {
+            
+            isCrit = true;
+        }
+
         //치명타 데미지
-        float finalCrit = _curCritRate * 0.01f * (_noCritStack + 1);
-        if (Managers.Utils.RandomSuccess(finalCrit))
+        if (isCrit)
         {
             _noCritStack = 0;
             damage *= (1 + (_curCritDamage * 0.01f));
             Managers.UIManager.OnCritUIEvent?.Invoke(true);
-        }
-        else
-        {
-            //확률 보정
-            _noCritStack++;
         }
 
         //---데미지 계산 후 나머지---
 
         //적중 스택 증가
         _hitStack++;
+
         //스태미나 소모
         _staminaPoint -= _staminaDownSpeed;
         _staminaPoint = Mathf.Clamp(_staminaPoint, 0, _maxStaminaPoint);
