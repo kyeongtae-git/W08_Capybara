@@ -1,54 +1,54 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerManager
 {
-    //½ºÅ³ Á¾·ù
+    //ìŠ¤í‚¬ ì¢…ë¥˜
     int[] _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
 
-    //Ä¡È®
+    //ì¹˜í™•
     float _baseCritRate = 10f;
     float _curCritRate;
 
-    //Ä¡ÇÇ
+    //ì¹˜í”¼
     float _baseCritDamage = 100f;
     float _curCritDamage;
 
-    //°ø°İ·Â
+    //ê³µê²©ë ¥
     float _baseATKDamage = 10f;
     float _curATKDamage;
 
-    //°ø°İ ¼Óµµ
+    //ê³µê²© ì†ë„
     float _baseATKSpeed = 1.00f;
     float _curATKSpeed;
 
-    //µ¥¹ÌÁö º¸³Ê½º
+    //ë°ë¯¸ì§€ ë³´ë„ˆìŠ¤
     //float _baseDamageBonus = 0;
     //float _curDamageBonus;
 
-    //ÀÇÁö
+    //ì˜ì§€
     float _baseWillPoint = 100f;
     float _willPoint;
     float _maxWillPoint;
 
-    //½ºÅÂ¹Ì³ª
+    //ìŠ¤íƒœë¯¸ë‚˜
     float _baseStaminaPoint = 100f;
     float _staminaPoint;
     float _maxStaminaPoint;
 
-    //ÀûÁß È½¼ö
+    //ì ì¤‘ íšŸìˆ˜
     int _hitStack = 0;
 
-    //Ä¡¸íÅ¸ È®·ü º¸Á¤
+    //ì¹˜ëª…íƒ€ í™•ë¥  ë³´ì •
     int _noCritStack = 0;
-    //Ä¡¸íÅ¸ ÃÊ°úºĞ ÀüÈ¯ ºñÀ²
+    //ì¹˜ëª…íƒ€ ì´ˆê³¼ë¶„ ì „í™˜ ë¹„ìœ¨
     float _overCritCoeff = 2f;
 
-    //ÀÇÁö °¨¼Ò ¼Óµµ
+    //ì˜ì§€ ê°ì†Œ ì†ë„
     float _willDownSpeed = 8f;
-    //½ºÅÂ¹Ì³ª °¨¼Ò ¼Óµµ
-    float _staminaDownSpeed = 8f;
+    //ìŠ¤íƒœë¯¸ë‚˜ ê°ì†Œ ì†ë„
+    float _staminaDownSpeed = 10f;
 
-    //È¿°úº° °è¼ö
+    //íš¨ê³¼ë³„ ê³„ìˆ˜
     //float _passiveCoeff = 0.15f;
     //float _conditionCoeff = 0.4f;
     //float _hitCoeff = 0.04f;
@@ -64,7 +64,7 @@ public class PlayerManager
         UpdateUI();
     }
 
-    //index¹øÂ° ½ºÅ³ ·¹º§¾÷
+    //indexë²ˆì§¸ ìŠ¤í‚¬ ë ˆë²¨ì—…
     public void LevelUpSkill(int index)
     {
         _skillLevelArray[index]++;
@@ -73,40 +73,40 @@ public class PlayerManager
         UpdateUI();
     }
 
-    //ÇöÀç (Ä¡È®, Ä¡ÇÇ, °ø°İ·Â, °ø°İ¼Óµµ, ÃÖ´ë ÀÇÁö, ÃÖ´ë ½ºÅÂ¹Ì³ª) °è»ê
+    //í˜„ì¬ (ì¹˜í™•, ì¹˜í”¼, ê³µê²©ë ¥, ê³µê²©ì†ë„, ìµœëŒ€ ì˜ì§€, ìµœëŒ€ ìŠ¤íƒœë¯¸ë‚˜) ê³„ì‚°
     void PlayerStatus()
     {
-        //½ºÅÈ °è»ê
+        //ìŠ¤íƒ¯ ê³„ì‚°
         _curCritRate    
-            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 30f, _skillLevelArray[4], 3f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 45f, _skillLevelArray[4], 0.9f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.30f, _skillLevelArray[5], 6f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.25f, _skillLevelArray[5], 0.009f, _skillLevelArray[9]);
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.30f, _skillLevelArray[6], 0.3f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.25f, _skillLevelArray[6], 0.009f, _skillLevelArray[10]);
         
         _curATKSpeed    
-            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.03f, _skillLevelArray[11]);
+            = MultiplyCalc(_baseATKSpeed, 0.15f, _skillLevelArray[3], 0.25f, _skillLevelArray[7], 0.009f, _skillLevelArray[11]);
         
         _maxWillPoint
             = MultiplyCalc(_baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
             = MultiplyCalc(_baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
-        //Ä¡¸íÅ¸ È®·ü 100% ÃÊ°ú ½Ã ÃÊ°ú ºĞÀÇ _overCritCoeff¹è¸¸Å­ Ä¡¸íÅ¸ ÇÇÇØ·Î ÀüÈ¯
+        //ì¹˜ëª…íƒ€ í™•ë¥  100% ì´ˆê³¼ ì‹œ ì´ˆê³¼ ë¶„ì˜ _overCritCoeffë°°ë§Œí¼ ì¹˜ëª…íƒ€ í”¼í•´ë¡œ ì „í™˜
         if (_curCritRate > 100f)
         {
             float oveCritRate = (_curCritRate - 100f) * _overCritCoeff;
-            _curCritDamage += oveCritRate;
+          
         }
 
-        //ÃÖ´ë°ª Á¦ÇÑ
+        //ìµœëŒ€ê°’ ì œí•œ
         //_curCritRate = Mathf.Clamp(_curCritRate, _baseCritRate, 100f);
         _curATKSpeed = Mathf.Clamp(_curATKSpeed, _baseATKSpeed, 30f);
         //Debug.Log($"{_curCritRate}, {_curCritDamage}, {_curATKDamage}, {_curATKSpeed}");
     }
 
-    //ÇÕ¿¬»ê
+    //í•©ì—°ì‚°
     float SumCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
@@ -120,24 +120,25 @@ public class PlayerManager
         return result;
     }
 
-    //°ö¿¬»ê
+    //ê³±ì—°ì‚°
     float MultiplyCalc(float baseStatus, float passiveCoeff, float passiveLevel, float conditionCoeff, float conditionLevel, float hitCoeff, float hitLevel)
     {
         int stamina = (_staminaPoint > 0) ? 1 : 0;
-        
+
         float result =
             (
-            baseStatus 
-            * (Mathf.Pow((1 + passiveCoeff), passiveLevel)) 
+            baseStatus
+            * (Mathf.Pow((1 + passiveCoeff), passiveLevel))
             * (Mathf.Pow((1 + (conditionCoeff * stamina)), conditionLevel))
-            )
-            + (hitCoeff * hitLevel * _hitStack);
+            * (1+hitCoeff * hitLevel * _hitStack)
+            );
+            
         //* (1 + (hitCoeff * hitLevel * _hitStack));
 
         return result;
     }
 
-    //ÀÇÁö °¨¼Ò
+    //ì˜ì§€ ê°ì†Œ
     public void DecreaseWill()
     {
         _willPoint -= _willDownSpeed * Time.deltaTime;
@@ -145,27 +146,27 @@ public class PlayerManager
         Managers.UIManager.OnUpdateWillPointUIEvent?.Invoke(_willPoint, _maxWillPoint);
     }
 
-    //ÀÇÁö°¡ 0ÀÎÁö È®ÀÎ
+    //ì˜ì§€ê°€ 0ì¸ì§€ í™•ì¸
     public bool RunOutOfWill()
     {
         return (_willPoint <= 0);
     }
 
-    //°ø°İ ½Ã°£ °è»ê
+    //ê³µê²© ì‹œê°„ ê³„ì‚°
     public float GetAttackTime()
     {
         float atkTime = (1 / _curATKSpeed);
         return atkTime;
     }
 
-    //ÃÖÁ¾ ÇÇÇØ·® °è»ê
+    //ìµœì¢… í”¼í•´ëŸ‰ ê³„ì‚°
     public float GetFinalDamage()
     {
-        //±âº» µ¥¹ÌÁö
+        //ê¸°ë³¸ ë°ë¯¸ì§€
         float damage = _curATKDamage;
         Managers.UIManager.OnCritUIEvent?.Invoke(false);
 
-        //Ä¡¸íÅ¸ µ¥¹ÌÁö
+        //ì¹˜ëª…íƒ€ ë°ë¯¸ì§€
         float finalCrit = _curCritRate * 0.01f * (_noCritStack + 1);
         if (Managers.Utils.RandomSuccess(finalCrit))
         {
@@ -175,15 +176,15 @@ public class PlayerManager
         }
         else
         {
-            //È®·ü º¸Á¤
+            //í™•ë¥  ë³´ì •
             _noCritStack++;
         }
 
-        //---µ¥¹ÌÁö °è»ê ÈÄ ³ª¸ÓÁö---
+        //---ë°ë¯¸ì§€ ê³„ì‚° í›„ ë‚˜ë¨¸ì§€---
 
-        //ÀûÁß ½ºÅÃ Áõ°¡
+        //ì ì¤‘ ìŠ¤íƒ ì¦ê°€
         _hitStack++;
-        //½ºÅÂ¹Ì³ª ¼Ò¸ğ
+        //ìŠ¤íƒœë¯¸ë‚˜ ì†Œëª¨
         _staminaPoint -= _staminaDownSpeed;
         _staminaPoint = Mathf.Clamp(_staminaPoint, 0, _maxStaminaPoint);
 
@@ -195,7 +196,7 @@ public class PlayerManager
 
     void UpdateUI()
     {
-        //UI °»½Å
+        //UI ê°±ì‹ 
         Managers.UIManager.OnUpdateCritRateUIEvent?.Invoke(_curCritRate);
         Managers.UIManager.OnUpdateCritDamageUIEvent?.Invoke(_curCritDamage);
         Managers.UIManager.OnUpdateATKDamageUIEvent?.Invoke(_curATKDamage);
