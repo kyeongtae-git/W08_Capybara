@@ -78,10 +78,10 @@ public class PlayerManager
     {
         //스탯 계산
         _curCritRate    
-            = SumCalc(_baseCritRate, 15f, _skillLevelArray[0], 45f, _skillLevelArray[4], 0.9f, _skillLevelArray[8]);
+            = SumCalc(_baseCritRate, 9f, _skillLevelArray[0], 15f, _skillLevelArray[4], 0.56f, _skillLevelArray[8]);
         
         _curCritDamage  
-            = MultiplyCalc(_baseCritDamage, 0.15f, _skillLevelArray[1], 0.25f, _skillLevelArray[5], 0.009f, _skillLevelArray[9]);
+            = MultiplyCalc(_baseCritDamage, 0.24f, _skillLevelArray[1], 0.4f, _skillLevelArray[5], 0.025f, _skillLevelArray[9]);
         _curATKDamage   
             = MultiplyCalc(_baseATKDamage, 0.15f, _skillLevelArray[2], 0.25f, _skillLevelArray[6], 0.009f, _skillLevelArray[10]);
         
