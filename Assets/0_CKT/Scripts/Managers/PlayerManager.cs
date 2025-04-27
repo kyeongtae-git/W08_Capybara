@@ -18,7 +18,7 @@ public class PlayerManager
     float _curATKDamage;
 
     //공격 속도
-    float _baseATKSpeed = 1.00f;
+    float _baseATKSpeed = 0.78f;
     float _curATKSpeed;
 
     //데미지 보너스
@@ -90,7 +90,7 @@ public class PlayerManager
             = SumCalc(1, _baseATKSpeed, 0.15f, _skillLevelArray[3], 0.30f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
         _maxWillPoint
-            = SumCalc(100, _baseWillPoint, 0.15f, _skillLevelArray[12], 0, 0, 0, 0);
+            = SumCalc(100, _baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
             = SumCalc(100, _baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
 
@@ -165,8 +165,8 @@ public class PlayerManager
         float damage = _curATKDamage;
         Managers.UIManager.OnCritUIEvent?.Invoke(false);
 
-        //치확 보정 스택 계산
-        int maxNoCritStack = Mathf.CeilToInt(100 / _curCritRate);
+        //치확 보정 스택 계산 (치명타 확률이 딱 100퍼일 때 때문에 내림x, 올림후 -1)
+        int maxNoCritStack = Mathf.CeilToInt(100 / _curCritRate) - 1;
 
         //치명타 발생 여부
         bool isCrit = false;
@@ -174,7 +174,6 @@ public class PlayerManager
         //천장 안 쳤으면 정상적으로 치명타 확률 계산
         if (_noCritStack < maxNoCritStack)
         {
-            
             if (Managers.Utils.RandomSuccess(_curCritRate * 0.01f))
             {
                 isCrit = true;
@@ -188,7 +187,6 @@ public class PlayerManager
         //천장 쳤으면 치명타 확정
         else
         {
-            
             isCrit = true;
         }
 
