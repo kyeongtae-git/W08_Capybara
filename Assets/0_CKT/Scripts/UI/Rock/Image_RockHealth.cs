@@ -6,13 +6,17 @@ public class Image_RockHealth : MonoBehaviour
 {
     Image _rockHealthImage;
 
-    private void OnEnable()
+    void Start()
     {
         _rockHealthImage = GetComponent<Image>();
+    }
+
+    private void OnEnable()
+    {
         Managers.UIManager.OnUpdateRockHealthUIEvent += UpdateImage;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         Managers.UIManager.OnUpdateRockHealthUIEvent -= UpdateImage;
     }

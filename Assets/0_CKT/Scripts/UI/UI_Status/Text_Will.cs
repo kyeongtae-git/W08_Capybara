@@ -5,15 +5,10 @@ public class Text_Will : MonoBehaviour
 {
     TextMeshProUGUI _willTMP;
 
-    private void OnEnable()
+    void Start()
     {
         _willTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateWillPointUIEvent += UpdateStage;
-    }
-
-    private void OnDestroy()
-    {
-        Managers.UIManager.OnUpdateWillPointUIEvent -= UpdateStage;
     }
 
     void UpdateStage(float cur, float max)

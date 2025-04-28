@@ -8,18 +8,13 @@ public class UI_SkillSeletctionDown : MonoBehaviour
     void Start()
     {
         _canvas = GetComponent<Canvas>();
+        
+
+        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent += CanvasOn;
+
         CanvasOn(true, false);
     }
 
-    private void OnEnable()
-    {
-        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent += CanvasOn;
-    }
-
-    private void OnDestroy()
-    {
-        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent -= CanvasOn;
-    }
 
     void CanvasOn(bool canvas, bool gameClear)
     {

@@ -5,15 +5,10 @@ public class Text_CritRate : MonoBehaviour
 {
     TextMeshProUGUI _critRateTMP;
 
-    private void OnEnable()
+    void Start()
     {
         _critRateTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateCritRateUIEvent += UpdateUI;
-    }
-
-    private void OnDestroy()
-    {
-        Managers.UIManager.OnUpdateCritRateUIEvent -= UpdateUI;
     }
 
     void UpdateUI(float critRate)

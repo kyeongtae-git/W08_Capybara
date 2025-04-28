@@ -5,15 +5,15 @@ public class Button_SelectEvent : MonoBehaviour
 {
     Button _selectEventButton;
 
-    private void OnEnable()
+    private void Start()
     {
         _selectEventButton = GetComponent<Button>();
         _selectEventButton.onClick.AddListener(() => Managers.UIManager.OnUI_EventCanvasEnableEvent?.Invoke(false));
         _selectEventButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(true, false));
     }
 
-    private void OnDestroy()
+    void SetEvent()
     {
-        _selectEventButton.onClick.RemoveAllListeners();
+
     }
 }

@@ -10,19 +10,13 @@ public class Text_Damage : MonoBehaviour
     float _normalSize = 50f;
     float _critSize = 100f;
 
-    private void OnEnable()
+    void Start()
     {
         _damageTMP = GetComponent<TextMeshProUGUI>();
         _damageTMP.enabled = false;
 
         Managers.UIManager.OnDamageUIEvent += UpdateUI;
         Managers.UIManager.OnCritUIEvent += CritText;
-    }
-
-    private void OnDestroy()
-    {
-        Managers.UIManager.OnDamageUIEvent -= UpdateUI;
-        Managers.UIManager.OnCritUIEvent -= CritText;
     }
 
     void UpdateUI(float damage)

@@ -39,6 +39,10 @@ public class Managers : MonoBehaviour
             _instance = this;
             //DontDestroyOnLoad(_instance);
         }
+        else
+        {
+            Destroy(this);
+        }
 
         GameManager.Init();
         PoolManager.Init();

@@ -5,15 +5,10 @@ public class Text_Stamina : MonoBehaviour
 {
     TextMeshProUGUI _staminaTMP;
 
-    private void OnEnable()
+    void Start()
     {
         _staminaTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateStaminaPointUIEvent += UpdateStage;
-    }
-
-    private void OnDestroy()
-    {
-        Managers.UIManager.OnUpdateStaminaPointUIEvent -= UpdateStage;
     }
 
     void UpdateStage(float cur, float max)
