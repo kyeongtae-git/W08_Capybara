@@ -7,6 +7,7 @@ public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     string _desName; // 스킬 또는 스텟
     string _description;
     int _skillCallCount;
+    float _skillValue;
     DescriptionPanel _descriptionPanel; // 패널 프리팹 참조
     AcquiredSkills _InfoData;
     GetSkillList _skillList;
@@ -41,10 +42,11 @@ public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         _desName = skill.name;
         _description = skill.explaintext;
+        _skillValue = skill.increaseValue;
 
         if (skillType != null)
         {
-            Debug.Log($"부모 오브젝트 '{parent.name}'에 할당된 스킬 타입: {skillType}, 호출 횟수: {_skillCallCount}");
+            //Debug.Log($"부모 오브젝트 '{parent.name}'에 할당된 스킬 타입: {skillType}, 호출 횟수: {_skillCallCount}");
             return skillType;
         }
         else
@@ -68,7 +70,7 @@ public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         // 패널을 이미지/텍스트 하단에 표시
         Vector2 panelPosition = new Vector2(transform.position.x, transform.position.y - 85f); // 하단 오프셋 조정
-        panel.ShowPanel(_desName,$"{_skillCallCount}", panelPosition);
+        panel.ShowPanel(_desName,$"증가한 수치 : {_skillValue} X {_skillCallCount} = {_skillValue* _skillCallCount}", panelPosition);
         
     }
 
