@@ -46,7 +46,7 @@ public class PlayerManager
     //의지 감소 속도
     float _willDownSpeed = 8f;
     //스태미나 감소 속도
-    float _staminaDownSpeed = 9f;
+    float _staminaDownSpeed = 10f;
 
     //효과별 계수
     //float _passiveCoeff = 0.15f;
@@ -79,26 +79,23 @@ public class PlayerManager
         //스탯 계산
         //치명타 확률 오버되어도 합연산이기 때문에 상관없음
         _curCritRate    
-            = SumCalc(100, _baseCritRate, 0.24f, _skillLevelArray[0], 0.45f, _skillLevelArray[4], 0.015f, _skillLevelArray[8]);
-        
+            = SumCalc(100, _baseCritRate, 0.18f, _skillLevelArray[0], 0.36f, _skillLevelArray[4], 0.015f, _skillLevelArray[8]);
+
         //이전 기준의 1.15배이기 때문에 그냥 15% 쌔지게 하면 됨 (적중 시 효과는 적중 횟수는 합연산, 스킬 레벨은 곱연산)
-        //치명타 터졌을 때 200%에서 15% 쌔지면 215%가 아니라 230%
-        float totalCritDamage 
-            = MultiplyCalc(_baseCritDamage, 0.24f, _skillLevelArray[1], 0.45f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
         _curCritDamage
-            = totalCritDamage;
+            = MultiplyCalc(_baseCritDamage, 0.18f, _skillLevelArray[1], 0.36f, _skillLevelArray[5], 0.015f, _skillLevelArray[9]);
 
         _curATKDamage   
-            = MultiplyCalc(_baseATKDamage, 0.24f, _skillLevelArray[2], 0.45f, _skillLevelArray[6], 0.015f, _skillLevelArray[10]);
+            = MultiplyCalc(_baseATKDamage, 0.18f, _skillLevelArray[2], 0.36f, _skillLevelArray[6], 0.015f, _skillLevelArray[10]);
         
         //곱연산하면 고점이 매우 높음, 합연산으로 고점 제한 + 수치는 15% 유지
         _curATKSpeed    
-            = SumCalc(1, _baseATKSpeed, 0.24f, _skillLevelArray[3], 0.45f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
+            = SumCalc(1, _baseATKSpeed, 0.18f, _skillLevelArray[3], 0.36f, _skillLevelArray[7], 0.015f, _skillLevelArray[11]);
         
         _maxWillPoint
             = SumCalc(100, _baseWillPoint, 0.10f, _skillLevelArray[12], 0, 0, 0, 0);
         _maxStaminaPoint
-            = SumCalc(100, _baseStaminaPoint, 0.15f, _skillLevelArray[13], 0, 0, 0, 0);
+            = SumCalc(100, _baseStaminaPoint, 0.11f, _skillLevelArray[13], 0, 0, 0, 0);
 
         //치명타 확률 100% 초과 시 초과 분의 _overCritCoeff배만큼 치명타 피해로 전환
         if (_curCritRate > 100f)
