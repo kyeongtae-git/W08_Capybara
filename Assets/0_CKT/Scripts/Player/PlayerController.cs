@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,7 +15,7 @@ public class PlayerController : MonoBehaviour
         set { _animator = value; }
     }
 
-    void Start()
+    void OnEnable()
     {
         Init();
     }
