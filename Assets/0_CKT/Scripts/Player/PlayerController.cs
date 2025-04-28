@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
         set { _animator = value; }
     }
 
-
-
     void Start()
     {
         Init();

@@ -5,10 +5,15 @@ public class Image_Stamina : MonoBehaviour
 {
     Image _staminaImage;
 
-    void Start()
+    private void OnEnable()
     {
         _staminaImage = GetComponent<Image>();
         Managers.UIManager.OnUpdateStaminaPointUIEvent += UpdateImage;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUpdateStaminaPointUIEvent -= UpdateImage;
     }
 
     void UpdateImage(float cur, float max)

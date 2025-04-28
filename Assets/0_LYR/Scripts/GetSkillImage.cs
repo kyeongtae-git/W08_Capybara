@@ -4,16 +4,13 @@ using UnityEngine.InputSystem;
 
 public class GetSkillImage : MonoBehaviour
 {
-
     private Dictionary<string, Sprite> _spriteMap;
     Sprite _defaultSprite;
 
-
-    void Awake()
+    void OnEnable()
     {
         LoadSkillImeage();
     }
-
 
     void LoadSkillImeage()
     {
@@ -35,5 +32,4 @@ public class GetSkillImage : MonoBehaviour
         }
         return null;
     }
-
 }

@@ -4,10 +4,15 @@ public class UI_Event : MonoBehaviour
 {
     Canvas _canvas;
 
-    void Start()
+    private void OnEnable()
     {
         _canvas = GetComponent<Canvas>();
         Managers.UIManager.OnUI_EventCanvasEnableEvent += OnCanvasEnable;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUI_EventCanvasEnableEvent -= OnCanvasEnable;
     }
 
     void OnCanvasEnable(bool boolean)

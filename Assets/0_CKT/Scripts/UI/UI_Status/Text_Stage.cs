@@ -5,10 +5,15 @@ public class Text_Stage : MonoBehaviour
 {
     TextMeshProUGUI _stageTMP;
 
-    void Start()
+    private void OnEnable()
     {
         _stageTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateStageUIEvent += UpdateStage;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUpdateStageUIEvent -= UpdateStage;
     }
 
     void UpdateStage(int index)

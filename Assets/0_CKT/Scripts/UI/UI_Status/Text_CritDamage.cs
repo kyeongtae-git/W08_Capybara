@@ -5,10 +5,15 @@ public class Text_CritDamage : MonoBehaviour
 {
     TextMeshProUGUI _critDamageTMP;
 
-    void Start()
+    private void OnEnable()
     {
         _critDamageTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateCritDamageUIEvent += UpdateUI;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUpdateCritDamageUIEvent -= UpdateUI;
     }
 
     void UpdateUI(float critDamage)

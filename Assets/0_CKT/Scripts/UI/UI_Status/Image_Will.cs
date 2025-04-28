@@ -5,10 +5,16 @@ public class Image_Will : MonoBehaviour
 {
     Image _willImage;
 
-    void Start()
+    private void OnEnable()
     {
         _willImage = GetComponent<Image>();
         Managers.UIManager.OnUpdateWillPointUIEvent += UpdateImage;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUpdateWillPointUIEvent -= UpdateImage;
+
     }
 
     void UpdateImage(float cur, float max)
