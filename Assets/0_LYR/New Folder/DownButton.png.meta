@@ -116,12 +116,12 @@ TextureImporter:
       name: DownButton_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 111
-        width: 193
-        height: 32
+        x: 0
+        y: 22
+        width: 250
+        height: 202
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f231ce94c9196f74e9d60f43b1f8989e
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DownButton_0: 5484833498205688005
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
