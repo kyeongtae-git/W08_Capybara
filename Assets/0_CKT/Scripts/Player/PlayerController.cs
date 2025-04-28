@@ -11,6 +11,14 @@ public class PlayerController : MonoBehaviour
 
     Animator _animator;
 
+    public Animator Animator
+    {
+        get { return _animator; }
+        set { _animator = value; }
+    }
+
+
+
     void Start()
     {
         Init();
@@ -49,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(_coAttack);
             }
             _coAttack = null;
-            _animator.SetBool("isWalk", true);
+            //_animator.SetBool("isWalk", true);
         }
     }
 
