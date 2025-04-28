@@ -871,14 +871,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 872692202492602722, guid: 0d99285cc0503d34e87812d6a8b70b86, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 872692202492602722, guid: 0d99285cc0503d34e87812d6a8b70b86, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 5484833498205688005, guid: b954cecec1c315045902677f1933a5b9, type: 3}
     - target: {fileID: 3731116553234020992, guid: 0d99285cc0503d34e87812d6a8b70b86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -923,14 +915,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 9067194059925972263, guid: 0d99285cc0503d34e87812d6a8b70b86, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9067194059925972263, guid: 0d99285cc0503d34e87812d6a8b70b86, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 224450377370039052, guid: 3ba27a7e8e387a5419d03300543264f7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

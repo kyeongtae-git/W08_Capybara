@@ -18,12 +18,14 @@ public class UI_SkillSeletctionDown : MonoBehaviour
 
     void CanvasOn(bool canvas, bool gameClear)
     {
+        _canvas = GetComponent<Canvas>();
         _canvas.enabled = canvas;
     }
 
 
     public void CanvasOnOff(bool canvas)
     {
+        _canvas = GetComponent<Canvas>();
         _canvas.enabled = canvas;
     }
 
