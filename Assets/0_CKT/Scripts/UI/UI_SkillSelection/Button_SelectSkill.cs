@@ -13,13 +13,6 @@ public class Button_SelectSkill : MonoBehaviour
 
     PlayerController _playerControllerForAnim;
 
-    void Start()
-    {
-        //SetSkill(Random.Range(0, System.Enum.GetValues(typeof(SkillType)).Length));
-
-        //Managers.UIManager.OnButton_SelectSkillSetEvent += SetSkill;
-    }
-
     public void SetSkill(int skillID)
     {
         TextMeshProUGUI skillname = transform.Find("SkillName").GetComponent<TextMeshProUGUI>();

@@ -4,13 +4,9 @@ using System.Text.RegularExpressions;
 
 public class GetSkillList : MonoBehaviour
 {
-    private void Awake()
+    private void OnEnable()
     {
         LoadSkillDataFromJson();
-    }
-
-    private void Start()
-    {
         PrintSkillData();
     }
 

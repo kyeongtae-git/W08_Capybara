@@ -18,9 +18,17 @@ public class UI_SkillSelection : MonoBehaviour
             _skills[i] = buttons[i].GetComponent<Button_SelectSkill>();
         }
 
-        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent += OnCanvasEnable;
-
         OnCanvasEnable(true, false);
+    }
+
+    private void OnEnable()
+    {
+        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent += OnCanvasEnable;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent -= OnCanvasEnable;
     }
 
     void OnCanvasEnable(bool canvas, bool gameClear)

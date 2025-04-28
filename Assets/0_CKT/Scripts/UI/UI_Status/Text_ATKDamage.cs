@@ -5,10 +5,16 @@ public class Text_ATKDamage : MonoBehaviour
 {
     TextMeshProUGUI _atkDamageTMP;
 
-    void Start()
+    private void OnEnable()
     {
         _atkDamageTMP = GetComponent<TextMeshProUGUI>();
         Managers.UIManager.OnUpdateATKDamageUIEvent += UpdateUI;
+    }
+
+    private void OnDestroy()
+    {
+        Managers.UIManager.OnUpdateATKDamageUIEvent -= UpdateUI;
+
     }
 
     void UpdateUI(float atkDamage)
