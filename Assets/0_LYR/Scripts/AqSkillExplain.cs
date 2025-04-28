@@ -17,7 +17,7 @@ public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void Start()
     {
-        _descriptionPanel = Resources.Load<DescriptionPanel>("LYR/Panel");
+        _descriptionPanel = Resources.Load<DescriptionPanel>("LYR/SkillPanel");
         _InfoData = FindAnyObjectByType<AcquiredSkills>();
         _skillList = FindAnyObjectByType<GetSkillList>();
     }
@@ -67,7 +67,7 @@ public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         CheckParentSkill();
 
         // 패널을 이미지/텍스트 하단에 표시
-        Vector2 panelPosition = new Vector2(transform.position.x, transform.position.y - 100f); // 하단 오프셋 조정
+        Vector2 panelPosition = new Vector2(transform.position.x, transform.position.y - 85f); // 하단 오프셋 조정
         panel.ShowPanel(_desName,$"{_skillCallCount}", panelPosition);
         
     }
