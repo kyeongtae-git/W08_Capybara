@@ -95,5 +95,29 @@ public class AcquiredSkills : MonoBehaviour
         }
     }
 
+    public GameObject GetAssignedObject(string skillType)
+    {
+        return assignedSkillObjects.ContainsKey(skillType) ? assignedSkillObjects[skillType] : null;
+    }
+
+
+    public int GetSkillCallCount(string skillType)
+    {
+        return skillCallCounts.ContainsKey(skillType) ? skillCallCounts[skillType] : 0;
+    }
+
+    // GameObject로 키 찾기
+    public string GetSkillType(GameObject slot)
+    {
+        foreach (var pair in assignedSkillObjects)
+        {
+            if (pair.Value == slot)
+                return pair.Key;
+        }
+        return null; // 해당 오브젝트가 없으면 null 반환
+    }
+
+
+
 
 }

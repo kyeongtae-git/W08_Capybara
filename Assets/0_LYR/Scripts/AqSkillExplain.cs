@@ -1,37 +1,83 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using static GetSkillList;
 
-public class AqSkillExplain : MonoBehaviour
+public class AqSkillExplain : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //[SerializeField] private
-    public GameObject panel; // 표시할 패널
-    private RectTransform panelRectTransform;
-    private RectTransform imageRectTransform;
+    string _desName; // 스킬 또는 스텟
+    string _description;
+    int _skillCallCount;
+    DescriptionPanel _descriptionPanel; // 패널 프리팹 참조
+    AcquiredSkills _InfoData;
+    GetSkillList _skillList;
+
+    GameObject instantiatedPanel; // 인스턴스화된 패널
+
+
 
     void Start()
     {
-        // 초기 설정
-        imageRectTransform = GetComponent<RectTransform>();
-        panelRectTransform = panel.GetComponent<RectTransform>();
-        panel.SetActive(false); // 패널 비활성화
+        _descriptionPanel = Resources.Load<DescriptionPanel>("LYR/Panel");
+        _InfoData = FindAnyObjectByType<AcquiredSkills>();
+        _skillList = FindAnyObjectByType<GetSkillList>();
     }
 
-    // 마우스가 이미지 위에 올라갔을 때
+
+    string CheckParentSkill()
+    {
+        // 스크립트가 붙은 오브젝트의 부모 가져오기
+        Transform parent = transform.parent;
+        if (parent == null)
+        {
+            Debug.LogWarning("이 오브젝트는 부모가 없습니다!");
+            return null;
+        }
+
+        // 부모 오브젝트 자체를 확인
+        Skill skill;
+        string skillType = _InfoData.GetSkillType(parent.gameObject);
+        _skillCallCount = _InfoData.GetSkillCallCount(skillType);
+        _skillList.TryGetSkill(skillType, out skill);
+
+        _desName = skill.name;
+        _description = skill.explaintext;
+
+        if (skillType != null)
+        {
+            Debug.Log($"부모 오브젝트 '{parent.name}'에 할당된 스킬 타입: {skillType}, 호출 횟수: {_skillCallCount}");
+            return skillType;
+        }
+        else
+        {
+            Debug.Log($"부모 오브젝트 '{parent.name}'은 할당된 스킬이 없습니다.");
+            return null;
+        }
+    }
+
+
+
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        panel.SetActive(true); // 패널 활성화
+        // 패널 인스턴스화
+        instantiatedPanel = Instantiate(_descriptionPanel.gameObject, transform);
+        var panel = instantiatedPanel.GetComponent<DescriptionPanel>();
 
-        // 이미지의 화면 좌표를 기준으로 패널 위치 설정
-        Vector2 imagePos = imageRectTransform.position;
-        panelRectTransform.position = imagePos;
+        CheckParentSkill();
 
-        // 필요하면 패널 위치 조정 (예: 이미지 오른쪽 위로)
-        // panelRectTransform.anchoredPosition += new Vector2(imageRectTransform.rect.width / 2, imageRectTransform.rect.height / 2);
+        // 패널을 이미지/텍스트 하단에 표시
+        Vector2 panelPosition = new Vector2(transform.position.x, transform.position.y - 100f); // 하단 오프셋 조정
+        panel.ShowPanel(_desName,$"{_skillCallCount}", panelPosition);
+        
     }
 
-    // 마우스가 이미지 밖으로 나갔을 때
     public void OnPointerExit(PointerEventData eventData)
     {
-        panel.SetActive(false); // 패널 비활성화
+        if (instantiatedPanel != null)
+        {
+            instantiatedPanel.GetComponent<DescriptionPanel>().HidePanel();
+            Destroy(instantiatedPanel);
+        }
     }
 }
