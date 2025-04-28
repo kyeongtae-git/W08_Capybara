@@ -36,7 +36,8 @@ public class GameManager
         Managers.PlayerManager.Init();
 
         _stage++;
-        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
+        int dDay = (_maxStage - _stage) + 1;
+        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(dDay);
         Debug.Log($"{_stage} 스테이지로 이동");
 
         //이벤트 발생했을 때

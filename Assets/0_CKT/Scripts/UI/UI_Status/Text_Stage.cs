@@ -13,6 +13,7 @@ public class Text_Stage : MonoBehaviour
 
     void UpdateStage(int index)
     {
-        _stageTMP.text = $"{index}ÀÏÂ÷";
+        string text = (index == 0) ? "D-Day" : $"D-{index}";
+        _stageTMP.text = text;
     }
 }
