@@ -21,7 +21,7 @@ public class RockController : MonoBehaviour
         if (_canvas != null) _canvas.enabled = false;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         Managers.RockManager.OnGetDamageEvent -= GetDamage;
     }

@@ -32,7 +32,7 @@ public class Managers : MonoBehaviour
     public static SkillManager SkillManager => _skillManager;
     static SkillManager _skillManager = new SkillManager();
 
-    private void Awake()
+    private void OnEnable()
     {
         if (_instance == null)
         {
