@@ -23,6 +23,8 @@ public class Button_SpeedMod : MonoBehaviour
 
     void ChangeTimeScale()
     {
+        if (Managers.GameManager.CurGameState != GameState.Idle) return;
+        
         _curTimeScale = (_curTimeScale % _maxTimeScale) + 1;
 
         Time.timeScale = _curTimeScale;

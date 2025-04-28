@@ -36,7 +36,8 @@ public class GameManager
         Managers.PlayerManager.Init();
 
         _stage++;
-        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(_stage);
+        int dDay = (_maxStage - _stage) + 1;
+        Managers.UIManager.OnUpdateStageUIEvent?.Invoke(dDay);
         Debug.Log($"{_stage} 스테이지로 이동");
 
         //이벤트 발생했을 때
@@ -59,6 +60,9 @@ public class GameManager
 
     public IEnumerator StartStage()
     {
+        //대기는 아니면서 광질 시작은 아닌 상태 (배속 변경 안되게 하는 용도)
+        _curGameState = GameState.Ready;
+
         //스탯 기본 상태로 초기화
         Managers.PlayerManager.Init();
 
