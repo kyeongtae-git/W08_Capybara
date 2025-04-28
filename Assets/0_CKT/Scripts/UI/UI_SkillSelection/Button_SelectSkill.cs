@@ -11,6 +11,8 @@ public class Button_SelectSkill : MonoBehaviour
     AcquiredSkills _aqSkill;
     GetSkillImage _skillImage;
 
+    PlayerController _playerControllerForAnim;
+
     void Start()
     {
         //SetSkill(Random.Range(0, System.Enum.GetValues(typeof(SkillType)).Length));
@@ -32,9 +34,10 @@ public class Button_SelectSkill : MonoBehaviour
         _skillList = FindAnyObjectByType<GetSkillList>();
         _aqSkill = FindAnyObjectByType<AcquiredSkills>();
         _skillImage = FindAnyObjectByType<GetSkillImage>();
+        _playerControllerForAnim = FindAnyObjectByType<PlayerController>();
 
         //Debug.Log(_skillList.name);
-        if(_skillList.TryGetSkill(skillTypestring, out skill))
+        if (_skillList.TryGetSkill(skillTypestring, out skill))
         {
             skillname.text = skill.name;
             skillexplain.text = skill.explaintext;
@@ -49,6 +52,7 @@ public class Button_SelectSkill : MonoBehaviour
         _selectSkillButton.onClick.AddListener(() => Managers.UIManager.OnUI_SkillSelectionCanvasEnableEvent?.Invoke(false, false));
         _selectSkillButton.onClick.AddListener(() => Managers.PlayerManager.LevelUpSkill(skillID));
         _selectSkillButton.onClick.AddListener(() => _aqSkill.AssignSkill(skill.type));
+        _selectSkillButton.onClick.AddListener(() => _playerControllerForAnim.Animator.SetBool("isWalk", true));
         _selectSkillButton.onClick.AddListener(() => StartCoroutine(Managers.GameManager.StartStage()));
     }
 }
