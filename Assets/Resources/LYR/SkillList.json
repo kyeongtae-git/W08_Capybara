@@ -27,25 +27,25 @@
     {
       "name": "빈틈 발견",
       "type": "Passive_CR",
-      "explaintext": "치명타 확률이 15% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
+      "explaintext": "치명타 확률이 16.5% 증가 (초과된 치명타 확률의 200%는 치명타 피해로 합산됩니다)",
       "increaseValue": 0
     },
     {
       "name": "암석 연구",
       "type": "Passive_CD",
-      "explaintext": "추가 치명타 피해가 현재 수치의 15%만큼 증가",
+      "explaintext": "추가 치명타 피해가 현재 수치의 16.5%만큼 증가",
       "increaseValue": 0
     },
     {
       "name": "보양식",
       "type": "Passive_AD",
-      "explaintext": "공격력이 현재 수치의 15%만큼 증가",
+      "explaintext": "공격력이 현재 수치의 16.5%만큼 증가",
       "increaseValue": 0
     },    
     {
       "name": "빛보다 빠르게",
       "type": "Passive_AS",
-      "explaintext": "공격 속도가 0.15만큼 증가 (최대 공격 속도 : 30)",
+      "explaintext": "공격 속도가 0.16.5만큼 증가 (최대 공격 속도 : 30)",
       "increaseValue": 0
     },    
     {
