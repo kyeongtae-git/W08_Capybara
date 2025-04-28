@@ -60,6 +60,9 @@ public class GameManager
 
     public IEnumerator StartStage()
     {
+        //대기는 아니면서 광질 시작은 아닌 상태 (배속 변경 안되게 하는 용도)
+        _curGameState = GameState.Ready;
+
         //스탯 기본 상태로 초기화
         Managers.PlayerManager.Init();
 

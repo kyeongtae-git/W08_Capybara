@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum GameState { Idle, Fight }
+public enum GameState { Idle, Ready, Fight }
 
 public enum SkillType
 {
