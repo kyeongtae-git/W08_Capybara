@@ -7,17 +7,18 @@ public class Button_SpeedMod : MonoBehaviour
     Button _speedModButton;
     TextMeshProUGUI _timeScaleTMP;
 
-    int _curTimeScale = 1;
+    int _curTimeScale = 2; //(0, 1, 2) + 1
     int _maxTimeScale = 3;
 
     void Start()
     {
-        _curTimeScale = 1;
-        _maxTimeScale = 3;
-
         _speedModButton = GetComponent<Button>();
         _timeScaleTMP = GetComponentInChildren<TextMeshProUGUI>();
 
+        _curTimeScale = 2;
+        _maxTimeScale = 3;
+
+        ChangeTimeScale();
         _speedModButton.onClick.AddListener(() => ChangeTimeScale());
     }
 

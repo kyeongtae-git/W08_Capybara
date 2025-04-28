@@ -53,8 +53,13 @@ public class PlayerManager
     //float _conditionCoeff = 0.4f;
     //float _hitCoeff = 0.04f;
 
-    public void Init()
+    public void Init(bool skillReset)
     {
+        if (skillReset)
+        {
+            _skillLevelArray = new int[System.Enum.GetValues(typeof(SkillType)).Length];
+        }
+
         _hitStack = 0;
         _noCritStack = 0;
 

@@ -48,7 +48,7 @@ public class Managers : MonoBehaviour
         PoolManager.Init();
         UIManager.Init();
         SoundManager.Init();
-        PlayerManager.Init();
+        PlayerManager.Init(true);
         RockManager.Init();
         EventManager.Init();
         SkillManager.Init();

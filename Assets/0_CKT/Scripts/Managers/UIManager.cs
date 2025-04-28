@@ -23,6 +23,21 @@ public class UIManager
 
     public void Init()
     {
-        
+        OnUI_EventCanvasEnableEvent = null;
+
+        OnUI_SkillSelectionCanvasEnableEvent = null;
+        OnButton_SelectSkillSetEvent = null;
+
+        OnUpdateStageUIEvent = null;
+        OnUpdateCritRateUIEvent = null;
+        OnUpdateCritDamageUIEvent = null;
+        OnUpdateATKDamageUIEvent = null;
+        OnUpdateATKSpeedUIEvent = null;
+        OnUpdateWillPointUIEvent = null;
+        OnUpdateStaminaPointUIEvent = null;
+
+        OnDamageUIEvent = null;
+        OnCritUIEvent = null;
+        OnUpdateRockHealthUIEvent = null;
     }
 }

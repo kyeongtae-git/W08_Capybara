@@ -33,7 +33,7 @@ public class GameManager
         _curGameState = GameState.Idle;
 
         //스탯 기본 상태로 초기화
-        Managers.PlayerManager.Init();
+        Managers.PlayerManager.Init(false);
 
         _stage++;
         int dDay = (_maxStage - _stage) + 1;
@@ -64,7 +64,7 @@ public class GameManager
         _curGameState = GameState.Ready;
 
         //스탯 기본 상태로 초기화
-        Managers.PlayerManager.Init();
+        Managers.PlayerManager.Init(false);
 
         // 적당한 거리에 돌 생성
         //55스테이지라면 에메랄드 바위 생성하기

@@ -22,6 +22,8 @@ public class RockManager
 
     public void Init()
     {
+        OnGetDamageEvent = null;
+
         _maxHealth = RockHealthDataLoader._instance.LoadHealthData(Managers.GameManager.Stage);
         Debug.Log(_maxHealth);
         _moveSpeed = (_spawnPoint.x - _stopPoint.x) / _moveTime;
