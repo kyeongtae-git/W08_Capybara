@@ -52,6 +52,5 @@ public class Managers : MonoBehaviour
         RockManager.Init();
         EventManager.Init();
         SkillManager.Init();
-        Time.timeScale = 6.0f;
     }
 }
