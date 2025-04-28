@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         _coAttack = null;
 
         _animator = GetComponent<Animator>();
-        _animator.SetBool("isWalk",true);
+        //_animator.SetBool("isWalk",true);
     }
 
     void Update()
