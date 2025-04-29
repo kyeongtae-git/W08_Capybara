@@ -9,19 +9,19 @@
     {
       "name": "파훼법이 보여!",
       "type": "Condition_CD",
-      "explaintext": "스태미나가 0 남아있으면 치명타 피해 배율이 현재 수치의 38%만큼 증가",
+      "explaintext": "스태미나가 남아있으면 치명타 피해 배율이 현재 수치의 38%만큼 증가",
       "increaseValue": 38
     },
     {
       "name": "시작이 반이다",
       "type": "Condition_AD",
-      "explaintext": "스태미나가 0 남아있으면 공격력이 현재 수치의 38%만큼 증가",
+      "explaintext": "스태미나가 남아있으면 공격력이 현재 수치의 38%만큼 증가",
       "increaseValue": 38
     },
     {
       "name": "초반 스퍼트",
       "type": "Condition_AS",
-      "explaintext": "스태미나가 0 남아있으면 공격 속도 0.38 증가 (최대 공격 속도 : 30)",
+      "explaintext": "스태미나가 남아있으면 공격 속도 0.38 증가 (최대 공격 속도 : 30)",
       "increaseValue": 38
     },
     {
@@ -81,8 +81,8 @@
     {
       "name": "#오운완",
       "type": "Max_Stamina",
-      "explaintext": "최대 스태미나 11 증가",
-      "increaseValue": 11
+      "explaintext": "최대 스태미나 15 증가",
+      "increaseValue": 15
     }
   ]
 }
